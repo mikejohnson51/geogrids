@@ -13,6 +13,7 @@
 #' @param overwrite A logical. overwrite the existing netrc file?
 #' @return A character vector containing the netrc file path
 #' @seealso \code{\link{checkNetrc}}
+#' @family netrc
 #' @examples
 #' \dontrun{
 #' writeNetrc(
@@ -54,17 +55,19 @@ writeNetrc <- function(login,
 #' @description Check that there is a netrc file with a valid
 #' entry for urs.earthdata.nasa.gov.
 #' @param netrcFile A character. File path to netrc file to check.
+#' @param machine the machine you are logging into
 #' @return logical
 #' @seealso \code{\link{writeNetrc}}
 #' @export
-#'
-checkNetrc <- function(netrcFile = getNetrcPath()) {
+#' @family netrc
+
+checkNetrc <- function(netrcFile = getNetrcPath(), machine = "urs.earthdata.nasa.gov" ) {
 
   if (!file.exists(netrcFile)) { return(FALSE) }
 
   lines <- gsub("http.*//", "", readLines(netrcFile))
 
-  return(any(grepl("urs.earthdata.nasa.gov", lines)))
+  return(any(grepl(machine, lines)))
 }
 
 
@@ -74,6 +77,8 @@ checkNetrc <- function(netrcFile = getNetrcPath()) {
 #' @examples
 #' getNetrcPath()
 #' @export
+#' @family netrc
+
 getNetrcPath <- function() {
   home <- Sys.getenv("HOME")
   if (whatOS() == "windows") {

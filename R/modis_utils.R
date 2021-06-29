@@ -3,7 +3,7 @@
 #' @importFrom rvest read_html html_nodes html_attr
 #' @importFrom dplyr `%>%`
 #' @export
-#'
+
 .modis_dir = function(product){
   molt = read_html('https://e4ftl01.cr.usgs.gov/MOLT/') %>%
     html_nodes("a") %>%
@@ -31,6 +31,7 @@
 #' @importFrom rvest read_html html_nodes html_attr
 #' @importFrom httr GET write_disk config set_cookies progress
 #' @importFrom dplyr group_by filter summarise n between tibble
+#' @family modis
 
 downloadMODIS = function(AOI,
                          product,
@@ -124,6 +125,7 @@ downloadMODIS = function(AOI,
 #' @export
 #' @importFrom sf gdal_utils
 #' @importFrom utils glob2rx
+#' @family grid
 
 getSubsets = function(file = NULL, product = NULL){
 
@@ -160,9 +162,7 @@ getSubsets = function(file = NULL, product = NULL){
 #' @param pattern the HDF file pattern to extract (see `getSubsets()`)
 #' @param date the date of the mosaic to build passed as a vector of length 1 (single date), or
 #' 2 (range of dates)
-#' @param te GDAL target extent. Vector of length 4 (xmin,ymin,xmax,ymax)
-#' @param tr GDAL target extent. Vector of length 2 (xres, yres
-#' @param t_srs GDAL target projection
+#' @param grid a grid abstraction build with `make_grid()`
 #' @param of GDAL output file type (default = GTiff)
 #' @param r GDAL resampling method
 #' @param overwrite should the files be overwriten?
@@ -170,16 +170,15 @@ getSubsets = function(file = NULL, product = NULL){
 #' @importFrom dplyr mutate filter between tibble
 #' @importFrom stringr str_replace
 #' @importFrom sf gdal_utils
+#' @family modis
 
 mosaicMODIS = function(dir = geo_path(),
                        prefix = "",
                        product,
                        date = NULL,
                        pattern = NULL,
-                       te = NULL,
-                       tr = NULL,
-                       t_srs = NULL,
-                       r = NULL,
+                       grid = NULL,
+                       r = "near",
                        overwrite = FALSE,
                        of = "GTiff"){
 
@@ -188,11 +187,16 @@ mosaicMODIS = function(dir = geo_path(),
   if(is.null(date)){c("1900-01-01", "2100-01-01")}
   if(length(date) == 1){ date = c(date, date) }
 
-  options = c("-of", of,
-              if(!is.null(te)){ c("-te", te)},
-              if(!is.null(tr)){ c("-tr", tr)},
-              if(!is.null(t_srs)){ c("-t_srs", t_srs)},
-              if(!is.null(r)){ c("-r", r)})
+  if(is.null(grid)){
+    options = c("-of", of,
+                "-r", r)
+  } else {
+    options = c("-of", of,
+                "-te", grid$ext,
+                "-tr", grid$resXY,
+                "-t_srs", grid$prj,
+                "-r", r)
+  }
 
   home   =  file.path(dir, "MODIS", product, "raw")
   outdir = file.path(dir,  "MODIS", product, "mosaics")
@@ -228,8 +232,6 @@ mosaicMODIS = function(dir = geo_path(),
   }
 }
 
-
-
 #' 8day to monthly mean
 #' @description takes 8 day MODIS tiles and generates a monthly mean
 #' mean((tile / 8)) / days_in_month
@@ -242,6 +244,7 @@ mosaicMODIS = function(dir = geo_path(),
 #' @export
 #' @importFrom raster stack writeRaster
 #' @importFrom dplyr filter group_indices mutate group_by
+#' @family modis
 
 day8_to_month = function(dir = geo_path(),
                          product = NULL,

@@ -102,7 +102,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mikejohnson51/zonal/">
+  <a href="https://github.com/mikejohnson51/geogrids/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -121,7 +121,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download MODIS tiles</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/zonal/blob/master/R/modis_utils.R'><code>R/modis_utils.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/geogrids/blob/master/R/modis_utils.R'><code>R/modis_utils.R</code></a></small>
     <div class="hidden name"><code>downloadMODIS.Rd</code></div>
     </div>
 
@@ -149,6 +149,11 @@
       <td><p>a MODIS product</p></td>
     </tr>
     <tr>
+      <th>date</th>
+      <td><p>the date(s) to download data for passed as a vector of length 1 (single date), or
+2 (range of dates)</p></td>
+    </tr>
+    <tr>
       <th>dir</th>
       <td><p>the directory to cache data. Default is <code>geo_path()</code></p></td>
     </tr>
@@ -156,21 +161,13 @@
       <th>netrc</th>
       <td><p>the path to your netrc file. Defaults to <code><a href='getNetrcPath.html'>getNetrcPath()</a></code></p></td>
     </tr>
-    <tr>
-      <th>startDate</th>
-      <td><p>a date to start looking for data</p></td>
-    </tr>
-    <tr>
-      <th>endDate</th>
-      <td><p>a data to end looking for data. If NULL defaults to startDate</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    
-
-
+    <div class='dont-index'><p>Other modis: 
+<code><a href='day8_to_month.html'>day8_to_month</a>()</code>,
+<code><a href='mosaicMODIS.html'>mosaicMODIS</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -183,7 +180,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Mike Johsnon.</p>
+  <p>Developed by Mike Johnson.</p>
 </div>
 
 <div class="pkgdown">

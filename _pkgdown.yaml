@@ -3,3 +3,25 @@ development:
 template:
   params:
     bootswatch: readable
+reference:
+- title: Utilites
+- subtitle: netrc
+  desc: Basic utilities for setting, checking and referencing an netrc file
+- contents:
+  - has_concept("netrc")
+- subtitle: Grid
+  desc: Grid Abrastraction function
+  contents:
+  - has_concept("grid")
+- subtitle: Cache
+  desc: Preliminary caching utilites
+  contents:
+  - has_concept("cache")
+- title: MODIS
+  desc: Basic utilities for downloading and processing MODIS data
+- contents:
+  - has_concept("modis")
+- title: CONUS-Soil
+  desc: Basic utilities for downloading and processing CONUS Soil data
+- contents:
+  - has_concept("conus-soil")

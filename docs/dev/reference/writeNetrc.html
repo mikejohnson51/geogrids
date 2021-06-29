@@ -102,7 +102,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mikejohnson51/zonal/">
+  <a href="https://github.com/mikejohnson51/geogrids/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -121,7 +121,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Write netrc file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/zonal/blob/master/R/netrc_utils.R'><code>R/netrc_utils.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/geogrids/blob/master/R/netrc_utils.R'><code>R/netrc_utils.R</code></a></small>
     <div class="hidden name"><code>writeNetrc.Rd</code></div>
     </div>
 
@@ -149,6 +149,10 @@
       <td><p>A character. Password associated with the login.</p></td>
     </tr>
     <tr>
+      <th>machine</th>
+      <td><p>the machine you are logging into</p></td>
+    </tr>
+    <tr>
       <th>netrcFile</th>
       <td><p>A character. A path to where the netrc file should be written.
 By default will go to your home directory, which is advised</p></td>
@@ -170,7 +174,10 @@ See <a href='https://urs.earthdata.nasa.gov/'>here</a>
 for instruction on how to register and set DataSpace credential.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='checkNetrc.html'>checkNetrc</a></code></p></div>
+    <div class='dont-index'><p><code><a href='checkNetrc.html'>checkNetrc</a></code></p>
+<p>Other netrc: 
+<code><a href='checkNetrc.html'>checkNetrc</a>()</code>,
+<code><a href='getNetrcPath.html'>getNetrcPath</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
@@ -191,7 +198,7 @@ for instruction on how to register and set DataSpace credential.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Mike Johsnon.</p>
+  <p>Developed by Mike Johnson.</p>
 </div>
 
 <div class="pkgdown">

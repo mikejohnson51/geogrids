@@ -1,4 +1,11 @@
-geo_path <- function() "/Volumes/Transcend/ngen"
+#' Path to cache
+#' @return path
+#' @export
+#' @family cache
+
+geo_path <- function(){
+  "/Volumes/Transcend/ngen"
+}
 
 .getExtension <- function(file){
   ext <- strsplit(basename(file), split="\\.")[[1]]
@@ -15,7 +22,8 @@ geo_path <- function() "/Volumes/Transcend/ngen"
 #' @param pattern pattern to look for using list.files
 #' @export
 #' @importFrom dplyr tibble
-#'
+#' @family cache
+
 geo_cache_list <- function(pattern = NULL) {
   ts = tibble(fullname = list.files(geo_path(), pattern = pattern, ignore.case = TRUE,
              recursive = TRUE, full.names = TRUE))

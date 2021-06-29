@@ -27,3 +27,9 @@ downloadMODIS(
 \description{
 Download MODIS tiles
 }
+\seealso{
+Other modis: 
+\code{\link{day8_to_month}()},
+\code{\link{mosaicMODIS}()}
+}
+\concept{modis}

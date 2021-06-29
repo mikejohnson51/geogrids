@@ -1,14 +1,10 @@
 # modis_runner
-library(AOI)
 library(geogrids)
 
 #---------------------------------------------------------
 ### Basic paths, AOI, and spatial grid
-AOI   = AOI::aoi_get(state = 'conus')
 prefix = "gridmet"
-te    = c(-124.7875, 25.04583,-67.0375, 49.42083)
-tr    = c(0.04166667, 0.04166667)
-t_srs = '+proj=longlat +ellps=WGS84 +no_defs'
+gridmet_grid = make_grid(file = "/Volumes/Transcend/ngen/gridmet_elevation.nc")
 
 # Leaf Area Index ---------------------------------------------------------
 # 8 day product
@@ -16,22 +12,20 @@ product = 'MOD15A2H.006'
 
 downloadMODIS(AOI,
               product,
-              startDate = "2001-01-01",
-              endDate = "2020-12-31")
+              date = c("2001-01-01", "2020-12-31"))
 
-patterns = getSubsets(product = product)
+(patterns = getSubsets(product = product))
 
 mosaicMODIS(prefix  = prefix,
             product = product,
             date    = c("2001-01-01", "2001-12-31"),
             pattern = patterns[2],
-            te      = te,
-            tr      = tr,
-            t_srs   = t_srs,
+            grid    = gridmet_grid,
             r       = "bilinear")
 
 # 8 day to monthly
-day8_to_month(product = product, prefix = prefix)
+day8_to_month(product = product,
+              prefix  = prefix)
 
 complete_netcdf(dir  = file.path(main_dir, product, 'monthly/'),
                 out  = file.path(main_dir, product, 'annual', paste0(product, ".nc")) ,

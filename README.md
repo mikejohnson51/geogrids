@@ -17,20 +17,16 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicens
 Concept](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 <!-- badges: end -->
 
-The goal of geogrids is to …
+The goal of geogrids is to download and manage geophysical and climate
+based grids and provide the utilies needed to shape these data to
+flexible geogrids.
 
 ## Installation
 
-You can install the released version of geogrids from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("geogrids")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mikejohnson51/geogrids")
+remotes::install_github("mikejohnson51/geogrids")
 ```

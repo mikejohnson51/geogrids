@@ -28,3 +28,9 @@ or 2 (range of dates)}
 takes 8 day MODIS tiles and generates a monthly mean
 mean((tile / 8)) / days_in_month
 }
+\seealso{
+Other modis: 
+\code{\link{downloadMODIS}()},
+\code{\link{mosaicMODIS}()}
+}
+\concept{modis}

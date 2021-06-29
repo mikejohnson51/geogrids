@@ -46,4 +46,9 @@ writeNetrc(
 }
 \seealso{
 \code{\link{checkNetrc}}
+
+Other netrc: 
+\code{\link{checkNetrc}()},
+\code{\link{getNetrcPath}()}
 }
+\concept{netrc}

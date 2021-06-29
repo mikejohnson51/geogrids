@@ -12,3 +12,8 @@ geo_cache_list(pattern = NULL)
 \description{
 Manage cached files
 }
+\seealso{
+Other cache: 
+\code{\link{geo_path}()}
+}
+\concept{cache}

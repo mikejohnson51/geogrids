@@ -14,3 +14,8 @@ getSubsets(file = NULL, product = NULL)
 \description{
 Find HDF subsets
 }
+\seealso{
+Other grid: 
+\code{\link{make_grid}()}
+}
+\concept{grid}

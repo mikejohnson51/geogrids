@@ -15,3 +15,9 @@ Get a default netrc file path
 \examples{
 getNetrcPath()
 }
+\seealso{
+Other netrc: 
+\code{\link{checkNetrc}()},
+\code{\link{writeNetrc}()}
+}
+\concept{netrc}

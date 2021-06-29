@@ -4,10 +4,12 @@
 \alias{checkNetrc}
 \title{Check netrc file}
 \usage{
-checkNetrc(netrcFile = getNetrcPath())
+checkNetrc(netrcFile = getNetrcPath(), machine = "urs.earthdata.nasa.gov")
 }
 \arguments{
 \item{netrcFile}{A character. File path to netrc file to check.}
+
+\item{machine}{the machine you are logging into}
 }
 \value{
 logical
@@ -18,4 +20,9 @@ entry for urs.earthdata.nasa.gov.
 }
 \seealso{
 \code{\link{writeNetrc}}
+
+Other netrc: 
+\code{\link{getNetrcPath}()},
+\code{\link{writeNetrc}()}
 }
+\concept{netrc}

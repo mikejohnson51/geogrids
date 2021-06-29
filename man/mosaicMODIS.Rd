@@ -10,10 +10,8 @@ mosaicMODIS(
   product,
   date = NULL,
   pattern = NULL,
-  te = NULL,
-  tr = NULL,
-  t_srs = NULL,
-  r = NULL,
+  grid = NULL,
+  r = "near",
   overwrite = FALSE,
   of = "GTiff"
 )
@@ -30,11 +28,7 @@ mosaicMODIS(
 
 \item{pattern}{the HDF file pattern to extract (see \code{getSubsets()})}
 
-\item{te}{GDAL target extent. Vector of length 4 (xmin,ymin,xmax,ymax)}
-
-\item{tr}{GDAL target extent. Vector of length 2 (xres, yres}
-
-\item{t_srs}{GDAL target projection}
+\item{grid}{a grid abstraction build with \code{make_grid()}}
 
 \item{r}{GDAL resampling method}
 
@@ -46,3 +40,9 @@ mosaicMODIS(
 Mosaics all MODIS HDF files for a given date to a new file with a flexible extent (te),
 resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults are used.
 }
+\seealso{
+Other modis: 
+\code{\link{day8_to_month}()},
+\code{\link{downloadMODIS}()}
+}
+\concept{modis}

@@ -101,7 +101,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mikejohnson51/zonal/">
+  <a href="https://github.com/mikejohnson51/geogrids/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -133,11 +133,20 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-utilites" class="hasAnchor"><a href="#section-utilites" class="anchor"></a>Utilites</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       
+      
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-netrc" class="hasAnchor"><a href="#section-netrc" class="anchor"></a>netrc</h3>
+          <p class="section-desc"><p>Basic utilities for setting, checking and referencing an netrc file</p></p>
+        </th>
+      </tr>
       
     </tbody><tbody>
       
@@ -151,15 +160,84 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="day8_to_month.html">day8_to_month()</a></code> </p>
+          <p><code><a href="getNetrcPath.html">getNetrcPath()</a></code> </p>
         </td>
-        <td><p>8day to monthly mean</p></td>
+        <td><p>Get a default netrc file path</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dot-modis_dir.html">.modis_dir()</a></code> </p>
+          <p><code><a href="writeNetrc.html">writeNetrc()</a></code> </p>
         </td>
-        <td><p>Scrape MODIS molt and mota archives</p></td>
+        <td><p>Write netrc file</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-grid" class="hasAnchor"><a href="#section-grid" class="anchor"></a>Grid</h3>
+          <p class="section-desc"><p>Grid Abrastraction function</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="getSubsets.html">getSubsets()</a></code> </p>
+        </td>
+        <td><p>Find HDF subsets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="make_grid.html">make_grid()</a></code> </p>
+        </td>
+        <td><p>Build Grid Abstraction</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-cache" class="hasAnchor"><a href="#section-cache" class="anchor"></a>Cache</h3>
+          <p class="section-desc"><p>Preliminary caching utilites</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="geo_cache_list.html">geo_cache_list()</a></code> </p>
+        </td>
+        <td><p>Manage cached files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geo_path.html">geo_path()</a></code> </p>
+        </td>
+        <td><p>Path to cache</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-modis" class="hasAnchor"><a href="#section-modis" class="anchor"></a>MODIS</h2>
+          <p class="section-desc"><p>Basic utilities for downloading and processin MODIS data</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="day8_to_month.html">day8_to_month()</a></code> </p>
+        </td>
+        <td><p>8day to monthly mean</p></td>
       </tr><tr>
         
         <td>
@@ -169,34 +247,23 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="geo_cache_list.html">geo_cache_list()</a></code> </p>
-        </td>
-        <td><p>Manage cached files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getNetrcPath.html">getNetrcPath()</a></code> </p>
-        </td>
-        <td><p>Get a default netrc file path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getSubsets.html">getSubsets()</a></code> </p>
-        </td>
-        <td><p>Find HDF subsets</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="mosaicMODIS.html">mosaicMODIS()</a></code> </p>
         </td>
         <td><p>Mosaic/Warp Raw MODIS Tiles</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeNetrc.html">writeNetrc()</a></code> </p>
-        </td>
-        <td><p>Write netrc file</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-conus-soil" class="hasAnchor"><a href="#section-conus-soil" class="anchor"></a>CONUS-Soil</h2>
+          <p class="section-desc"><p>Basic utilities for downloading and processin CONUS Soil data</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      
     </tbody>
     </table>
   </div>
@@ -211,7 +278,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Mike Johsnon.</p>
+  <p>Developed by Mike Johnson.</p>
 </div>
 
 <div class="pkgdown">
