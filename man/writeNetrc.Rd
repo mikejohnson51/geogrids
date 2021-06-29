@@ -17,6 +17,8 @@ writeNetrc(
 
 \item{password}{A character. Password associated with the login.}
 
+\item{machine}{the machine you are logging into}
+
 \item{netrcFile}{A character. A path to where the netrc file should be written.
 By default will go to your home directory, which is advised}
 

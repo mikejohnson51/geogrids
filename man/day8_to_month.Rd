@@ -24,9 +24,6 @@ or 2 (range of dates)}
 
 \item{overwrite}{should the files be overwriten?}
 }
-\value{
-
-}
 \description{
 takes 8 day MODIS tiles and generates a monthly mean
 mean((tile / 8)) / days_in_month

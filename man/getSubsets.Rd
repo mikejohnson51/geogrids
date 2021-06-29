@@ -11,9 +11,6 @@ getSubsets(file = NULL, product = NULL)
 
 \item{product}{a MODIS product name}
 }
-\value{
-
-}
 \description{
 Find HDF subsets
 }

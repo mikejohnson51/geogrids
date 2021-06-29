@@ -22,11 +22,10 @@
 #' Download MODIS tiles
 #' @param AOI the region to find data for (sf)
 #' @param product a MODIS product
-#' @param startDate a date to start looking for data
-#' @param endDate a data to end looking for data. If NULL defaults to startDate
+#' @param date the date(s) to download data for passed as a vector of length 1 (single date), or
+#' 2 (range of dates)
 #' @param dir the directory to cache data. Default is `geo_path()`
 #' @param netrc the path to your netrc file. Defaults to `getNetrcPath()`
-#' @return
 #' @export
 #' @importFrom sf read_sf st_filter st_transform st_crs
 #' @importFrom rvest read_html html_nodes html_attr
@@ -77,7 +76,7 @@ downloadMODIS = function(AOI,
   ts$basename = basename(ts$fullname)
 
   oo = ts %>%
-    dplyr::filter(between(as.Date(subdir), as.Date(startDate), as.Date(endDate))) %>%
+    dplyr::filter(between(as.Date(subdir), as.Date(date[1]), as.Date(date[2]))) %>%
     dplyr::filter(grepl(paste(tiles, collapse = "|"), basename)) %>%
     dplyr::group_by(subdir) %>%
     dplyr::summarise(count = n())
@@ -122,7 +121,6 @@ downloadMODIS = function(AOI,
 #' Find HDF subsets
 #' @param file a HDF file path
 #' @param product a MODIS product name
-#' @return
 #' @export
 #' @importFrom sf gdal_utils
 #' @importFrom utils glob2rx
@@ -168,7 +166,6 @@ getSubsets = function(file = NULL, product = NULL){
 #' @param of GDAL output file type (default = GTiff)
 #' @param r GDAL resampling method
 #' @param overwrite should the files be overwriten?
-#' @return
 #' @export
 #' @importFrom dplyr mutate filter between tibble
 #' @importFrom stringr str_replace
@@ -242,7 +239,6 @@ mosaicMODIS = function(dir = geo_path(),
 ##' or 2 (range of dates)
 #' @param overwrite should the files be overwriten?
 #' @param prefix the prefix to search for
-#' @return
 #' @export
 #' @importFrom raster stack writeRaster
 #' @importFrom dplyr filter group_indices mutate group_by
@@ -253,6 +249,8 @@ day8_to_month = function(dir = geo_path(),
                          prefix = NULL,
                          overwrite = FALSE){
 
+  files <- subdir <- month <- year <- g <- NULL
+
   if(length(date) == 1){ date = c(date, date) }
 
   here = file.path(dir, "MODIS", product, "mosaics")
@@ -260,7 +258,7 @@ day8_to_month = function(dir = geo_path(),
   out = file.path(dir, "MODIS", product, "monthly_means")
   dir.create(out, showWarnings = FALSE)
 
-  df = tibble(files = list.files(here, recursive = TRUE, pattern = prefix,  full = TRUE))
+  df = tibble(files = list.files(here, recursive = TRUE, pattern = prefix,  full.names = TRUE))
   if(is.null(prefix)){ prefix = ""}
 
   df = df %>%

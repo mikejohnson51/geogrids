@@ -17,16 +17,12 @@ downloadMODIS(
 
 \item{product}{a MODIS product}
 
+\item{date}{the date(s) to download data for passed as a vector of length 1 (single date), or
+2 (range of dates)}
+
 \item{dir}{the directory to cache data. Default is \code{geo_path()}}
 
 \item{netrc}{the path to your netrc file. Defaults to \code{getNetrcPath()}}
-
-\item{startDate}{a date to start looking for data}
-
-\item{endDate}{a data to end looking for data. If NULL defaults to startDate}
-}
-\value{
-
 }
 \description{
 Download MODIS tiles

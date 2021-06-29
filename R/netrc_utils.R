@@ -7,6 +7,7 @@
 #' for instruction on how to register and set DataSpace credential.
 #' @param login A character. Email address used for logging in on earthdata
 #' @param password A character. Password associated with the login.
+#' @param machine the machine you are logging into
 #' @param netrcFile A character. A path to where the netrc file should be written.
 #' By default will go to your home directory, which is advised
 #' @param overwrite A logical. overwrite the existing netrc file?
@@ -53,8 +54,6 @@ writeNetrc <- function(login,
 #' @description Check that there is a netrc file with a valid
 #' entry for urs.earthdata.nasa.gov.
 #' @param netrcFile A character. File path to netrc file to check.
-#' @param onStaging A logical. Whether to check the staging server instead
-#' of the production server.
 #' @return logical
 #' @seealso \code{\link{writeNetrc}}
 #' @export

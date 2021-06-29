@@ -42,9 +42,6 @@ mosaicMODIS(
 
 \item{of}{GDAL output file type (default = GTiff)}
 }
-\value{
-
-}
 \description{
 Mosaics all MODIS HDF files for a given date to a new file with a flexible extent (te),
 resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults are used.

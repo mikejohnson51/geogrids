@@ -8,9 +8,6 @@ checkNetrc(netrcFile = getNetrcPath())
 }
 \arguments{
 \item{netrcFile}{A character. File path to netrc file to check.}
-
-\item{onStaging}{A logical. Whether to check the staging server instead
-of the production server.}
 }
 \value{
 logical
