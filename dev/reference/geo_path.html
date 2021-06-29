@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mosaic/Warp Raw MODIS Tiles — mosaicMODIS • geogrids</title>
+<title>Path to cache — geo_path • geogrids</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Mosaic/Warp Raw MODIS Tiles — mosaicMODIS" />
-<meta property="og:description" content="Mosaics all MODIS HDF files for a given date to a new file with a flexible extent (te),
-resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults are used." />
+<meta property="og:title" content="Path to cache — geo_path" />
+<meta property="og:description" content="Path to cache" />
 
 
 <meta name="robots" content="noindex">
@@ -121,75 +120,25 @@ resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults a
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mosaic/Warp Raw MODIS Tiles</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/geogrids/blob/master/R/modis_utils.R'><code>R/modis_utils.R</code></a></small>
-    <div class="hidden name"><code>mosaicMODIS.Rd</code></div>
+    <h1>Path to cache</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/geogrids/blob/master/R/cache.R'><code>R/cache.R</code></a></small>
+    <div class="hidden name"><code>geo_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Mosaics all MODIS HDF files for a given date to a new file with a flexible extent (te),
-resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults are used.</p>
+    <p>Path to cache</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mosaicMODIS</span><span class='op'>(</span>
-  dir <span class='op'>=</span> <span class='fu'><a href='geo_path.html'>geo_path</a></span><span class='op'>(</span><span class='op'>)</span>,
-  prefix <span class='op'>=</span> <span class='st'>""</span>,
-  <span class='va'>product</span>,
-  date <span class='op'>=</span> <span class='cn'>NULL</span>,
-  pattern <span class='op'>=</span> <span class='cn'>NULL</span>,
-  grid <span class='op'>=</span> <span class='cn'>NULL</span>,
-  r <span class='op'>=</span> <span class='st'>"near"</span>,
-  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  of <span class='op'>=</span> <span class='st'>"GTiff"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>geo_path</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>dir</th>
-      <td><p>the directory to cache data. Default is <code><a href='geo_path.html'>geo_path()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>prefix</th>
-      <td><p>the prefix for the outputfiles, shoudl be specfic to the requested grid</p></td>
-    </tr>
-    <tr>
-      <th>product</th>
-      <td><p>the MODIS product to search for</p></td>
-    </tr>
-    <tr>
-      <th>date</th>
-      <td><p>the date of the mosaic to build passed as a vector of length 1 (single date), or
-2 (range of dates)</p></td>
-    </tr>
-    <tr>
-      <th>pattern</th>
-      <td><p>the HDF file pattern to extract (see <code><a href='getSubsets.html'>getSubsets()</a></code>)</p></td>
-    </tr>
-    <tr>
-      <th>grid</th>
-      <td><p>a grid abstraction build with <code><a href='make_grid.html'>make_grid()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>r</th>
-      <td><p>GDAL resampling method</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>should the files be overwriten?</p></td>
-    </tr>
-    <tr>
-      <th>of</th>
-      <td><p>GDAL output file type (default = GTiff)</p></td>
-    </tr>
-    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>path</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other modis: 
-<code><a href='day8_to_month.html'>day8_to_month</a>()</code>,
-<code><a href='downloadMODIS.html'>downloadMODIS</a>()</code></p></div>
+    <div class='dont-index'><p>Other cache: 
+<code><a href='geo_cache_list.html'>geo_cache_list</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
