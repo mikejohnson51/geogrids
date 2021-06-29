@@ -1,0 +1,23 @@
+---
+title: "Runner"
+author: "Mike Johnson"
+date: "6/28/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('R/cache.R')
+source('R/netrc_utils.R')
+```
+
+```{r ppt}
+xx = geo_path()
+
+
+
+xx = geo_cache_list(pattern = "pr.+nc$") %>% 
+  filter(!grepl("annual|normal", subdir))
+
+xx
+```
