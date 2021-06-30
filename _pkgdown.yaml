@@ -21,7 +21,11 @@ reference:
   desc: Basic utilities for downloading and processing MODIS data
 - contents:
   - has_concept("modis")
-- title: CONUS-Soil
-  desc: Basic utilities for downloading and processing CONUS Soil data
+- title: GridMET
+  desc: Basic utilities for downloading and processing GridMET data
 - contents:
-  - has_concept("conus-soil")
+  - has_concept("gridmet")
+- title: Snow
+  desc: Basic utilities for downloading and processing snow data
+- contents:
+  - has_concept("snow")
