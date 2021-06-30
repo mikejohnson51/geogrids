@@ -18,9 +18,11 @@ make_grid = function(file = NULL,
 
 
   if(!is.null(file)){
-    r = raster::raster(file)
+    r = suppressWarnings({ raster::raster(file) })
 
-    list(ext = as.vector(raster::extent(r)),
+    ext = raster::extent(r)
+
+    list(ext = c(ext[1],ext[3],ext[2],ext[4]),
          dimXY = dim(r)[2:1],
          resXY = raster::res(r),
          prj = as.character(raster::crs(r)))
@@ -47,3 +49,38 @@ make_grid = function(file = NULL,
     list(ext = ext, dimXY = dimXY, resXY = resXY, prj = prj)
   }
 }
+
+
+#' Wrap
+#' @param files a vector of files paths
+#' @param grid a grid abstraction to warp to (see `make_grid()`)
+#' @param r resampling method see gdalwarp for options
+#' @param disk return file paths (TRUE) or raster stack (FALSE)
+#' @return vector of filepaths or raster::stack
+#' @export
+#' @importFrom sf gdal_utils
+#' @importFrom raster stack
+#' @family grid
+
+geogrid_warp = function(files, grid = NULL, r = "near", disk = TRUE){
+
+  tmps = tempfile(basename(files),fileext = ".tif")
+
+  o = sapply(1:length(files), function(x){
+    sf::gdal_utils("warp",
+                   source = files[x],
+                   dest   = tmps[x],
+                   options = c("-of", "GTiff",
+                               "-te", grid$ext,
+                               "-tr", grid$resXY,
+                               "-t_srs", grid$prj,
+                               "-r", r))
+  })
+
+  if(disk){
+    return(tmps)
+  } else {
+    return(raster::stack(tmps))
+  }
+}
+

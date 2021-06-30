@@ -22,6 +22,7 @@ entry for urs.earthdata.nasa.gov.
 \code{\link{writeNetrc}}
 
 Other netrc: 
+\code{\link{check_nco}()},
 \code{\link{getNetrcPath}()},
 \code{\link{writeNetrc}()}
 }

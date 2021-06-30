@@ -18,6 +18,7 @@ getNetrcPath()
 \seealso{
 Other netrc: 
 \code{\link{checkNetrc}()},
+\code{\link{check_nco}()},
 \code{\link{writeNetrc}()}
 }
 \concept{netrc}

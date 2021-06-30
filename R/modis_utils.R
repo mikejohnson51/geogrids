@@ -242,7 +242,7 @@ mosaicMODIS = function(dir = geo_path(),
 #' @param overwrite should the files be overwriten?
 #' @param prefix the prefix to search for
 #' @export
-#' @importFrom raster stack writeRaster
+#' @importFrom raster stack writeRaster mean
 #' @importFrom dplyr filter group_indices mutate group_by
 #' @family modis
 
@@ -292,7 +292,7 @@ day8_to_month = function(dir = geo_path(),
 
     if(!file.exists(dest) | all(overwrite, file.exists(dest))){
       suppressWarnings({
-        o = (mean(raster::stack(subs$files)/8) * subs$days_in_month[1])
+        o = (raster::mean(raster::stack(subs$files)/8) * subs$days_in_month[1])
         raster::writeRaster(o,dest)
       })
       message(subs$subdir[1], " complete")
@@ -300,6 +300,8 @@ day8_to_month = function(dir = geo_path(),
       message(subs$subdir[1], " exists")
     }
   }
+
+
 }
 
 .ndays <- function(d) {

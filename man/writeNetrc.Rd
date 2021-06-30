@@ -49,6 +49,7 @@ writeNetrc(
 
 Other netrc: 
 \code{\link{checkNetrc}()},
+\code{\link{check_nco}()},
 \code{\link{getNetrcPath}()}
 }
 \concept{netrc}

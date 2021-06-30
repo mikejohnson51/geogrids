@@ -16,6 +16,7 @@ Find HDF subsets
 }
 \seealso{
 Other grid: 
+\code{\link{geogrid_warp}()},
 \code{\link{make_grid}()}
 }
 \concept{grid}

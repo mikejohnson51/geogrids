@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/basics.html">Basic Example</a>
+    </li>
+    <li>
       <a href="../articles/characteristics.html">Catchment Characteristics</a>
     </li>
   </ul>
@@ -93,27 +96,30 @@
 <div id="climate" class="section level1">
 <h1 class="hasAnchor">
 <a href="#climate" class="anchor"></a>Climate</h1>
+<div id="water" class="section level2">
+<h2 class="hasAnchor">
+<a href="#water" class="anchor"></a>Water</h2>
 <div id="mean-precipitation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mean-precipitation" class="anchor"></a>Mean precipitation</h3>
 <blockquote>
 <p>Mean daily precipitation (mm/day)</p>
 </blockquote>
-<p><span style="color:blue">We will use the daily GridMet files for pr_* from 2000-2020. This will be used to compute a table with rows representing catchments, and columns representing a daily catchment mean </span>.</p>
+<p><span style="color:blue">We will use the daily GridMet files for pr_* from 2010-2020. This will be used to compute a table with rows representing catchments, and columns representing a daily catchment mean </span>.</p>
 </div>
-<div id="fraction-of-snow" class="section level3">
+<div id="snowfall-fraction" class="section level3">
 <h3 class="hasAnchor">
-<a href="#fraction-of-snow" class="anchor"></a>Fraction of snow</h3>
+<a href="#snowfall-fraction" class="anchor"></a>Snowfall Fraction</h3>
 <blockquote>
 <p>Fraction of precipitation falling as snow (i.e., on days colder than 0 °C)</p>
 </blockquote>
-<p><span style="color:blue">We will use the daily GridMet files for tmin_* from 2000-2020 to create a matrix mask. This mask will be applied to the mean daily PPT matrix to compute the fraction.</span></p>
+<p><span style="color:blue">We will use the daily GridMet files for tmin_* from 2010-2020 to create a matrix mask. This mask will be applied to the mean daily PPT matrix to compute the fraction. We will use a temperature threshold following Keith Jennings <a href="https://www.nature.com/articles/s41467-018-03629-7">paper</a> and the data found <a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.c9h35">here</a> </span></p>
 </div>
 <div id="precip--seasonality" class="section level3">
 <h3 class="hasAnchor">
 <a href="#precip--seasonality" class="anchor"></a>Precip. seasonality</h3>
 <blockquote>
-<p>Seasonality and timing of precipitation (estimated using sine curves to represent the annual temperature and preciptiation cycles, positive <span class="math display">\[negative\]</span> values indicate that precipitation peaks in summer <span class="math display">\[winter\]</span>, values close to 0 indicate uniform precipitation (<a href="https://www.sciencedirect.com/science/article/pii/S030917080900102X">eq 14</a>)</p>
+<p>Seasonality and timing of precipitation (estimated using sine curves to represent the annual temperature and preciptiation cycles, positive [negative] values indicate that precipitation peaks in summer [winter], values close to 0 indicate uniform precipitation (<a href="https://www.sciencedirect.com/science/article/pii/S030917080900102X">eq 14</a>)</p>
 </blockquote>
 <p><span style="color:red">NOT SURE YET.</span></p>
 </div>
@@ -123,7 +129,7 @@
 <blockquote>
 <p>Frequency of high precipitation days (≥5 times mean daily precipitation) (days/year)</p>
 </blockquote>
-<p><span style="color:blue">Using the mean PPT matrix, the following will be applied rowwise <code>(sum(x &gt;= rowMean(.))</code> </span>.</p>
+<p><span style="color:blue">Using the mean PPT matrix, the data will be grouped by year and the number of days exceeding 5mm will be computed </span>.</p>
 </div>
 <div id="high-precip--duration" class="section level3">
 <h3 class="hasAnchor">
@@ -131,7 +137,8 @@
 <blockquote>
 <p>average duration of high precipitation events (number of consecutive days ≥5 times mean daily precipitation) (days)</p>
 </blockquote>
-<p><span style="color:blue">Will be computed from daily PPT matrix </span>.</p>
+<p>Need to look <a href="https://stackoverflow.com/questions/54463950/r-count-consecutive-days-with-condition">here</a> for <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rleid.html">data.table::rleid</a></code></p>
+<p><span style="color:blue">Will be computed from daily PPT matrix</span>.</p>
 </div>
 <div id="low-precip--frequency" class="section level3">
 <h3 class="hasAnchor">
@@ -147,24 +154,28 @@
 <blockquote>
 <p>average duration of dry periods (number of consecutive days &lt;1 mm/day) (days)</p>
 </blockquote>
-<p><span style="color:blue">Using the mean PPT matrix, the following will be applied rowwise <code>(sum(x &lt;=1))</code> </span>.</p>
+<p>Need to look <a href="https://stackoverflow.com/questions/54463950/r-count-consecutive-days-with-condition">here</a> for <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rleid.html">data.table::rleid</a></code></p>
 </div>
+</div>
+<div id="energy" class="section level2">
+<h2 class="hasAnchor">
+<a href="#energy" class="anchor"></a>Energy</h2>
 <div id="mean-pet" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mean-pet" class="anchor"></a>Mean PET</h3>
 <blockquote>
 <p>Mean daily PET (estimated by N15 using Priestley-Taylor formulation calibrated for each catchment)</p>
 </blockquote>
-<p><span style="color:blue">We will use the daily GridMet files for pet_* from 2000-2020 </span>.</p>
+<p><span style="color:blue">We will use the daily GridMet files for pet_* from 2000-2020 to compute a mean daily normal </span>.</p>
 </div>
 <div id="aridity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#aridity" class="anchor"></a>Aridity</h3>
 <blockquote>
-<p>Aridity (PET/P, ratio of mean PET <span class="math display">\[estimated by N15 using
-Priestley-Taylor formulation calibrated for each catchment\]</span> to mean precipitation)</p>
+<p>Aridity (PET/P, ratio of mean PET [estimated by N15 using Priestley-Taylor formulation calibrated for each catchment] to mean precipitation)</p>
 </blockquote>
-<p><span style="color:blue">We will create a single AI layer computed as the mean annual PET divided by the mean annual PRCP </span>.</p>
+<p><span style="color:blue">We will create a single AI layer computed as the mean daily PET divided by the mean daily PRCP </span>.</p>
+</div>
 </div>
 </div>
 <div id="catchment" class="section level1">
@@ -184,7 +195,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>Catchment mean elevation (meters)</p>
 </blockquote>
-<p><span style="color:blue">Will be extracted from NWM 1km geogrid <code>HGT_M</code> </span>.</p>
+<p><span style="color:blue">Will be extracted from NWM 1km geogrid <code>HGT_M</code> </span>. <span style="color:blue">Or the 4km GridMet Grid</span>.</p>
 </div>
 <div id="mean-slope" class="section level3">
 <h3 class="hasAnchor">
@@ -192,7 +203,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>Catchment mean slope (m/km)</p>
 </blockquote>
-<p><span style="color:blue">Will be computed and extracted from NWM 1km geogrid <code>HGT_M</code> </span>.</p>
+<p><span style="color:blue">Will be computed and extracted from the elevation product </span>.</p>
 </div>
 </div>
 <div id="soil" class="section level1">
@@ -204,6 +215,8 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>Subsurface permeability (log10) m2 from GLHYMPS</p>
 </blockquote>
+<p>Data from: Gleeson, T., Moosdorf ,N., Hartmann,J. and van Beek, L.P.H. (2014) A glimpse beneath earth’s surface: GLobal HYdrogeology MaPS (GLHYMPS) of permeability and porosity. Geophyscial Research Letters, 41: 2014GL059856 doi: 10.1002/2014gl059856</p>
+<p>Using feild: logK_Ice_x100_INT from the supplied shapefile. Currently rasterizing this to the CONUS-Soil 1KM grid but this can be changed.</p>
 </div>
 <div id="frac--carbonate-sedimentary-rock" class="section level3">
 <h3 class="hasAnchor">
@@ -211,6 +224,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>Fraction of the catchment area characterized as “Carbonate sedimentary rocks” from GLiM</p>
 </blockquote>
+<p>class where xx in dataset == ‘sc’. See Table 1 <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2012GC004370">here</a></p>
 </div>
 <div id="clay-fraction" class="section level3">
 <h3 class="hasAnchor">
@@ -220,13 +234,13 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 </blockquote>
 <p><span style="color:blue"> Will extract the <code>clay.bsq</code> file distributed by Penn State and compute catchment mean </span>.</p>
 </div>
-<div id="soil-depth-to-bedrock" class="section level3">
+<div id="silt-fraction" class="section level3">
 <h3 class="hasAnchor">
-<a href="#soil-depth-to-bedrock" class="anchor"></a>Soil depth to bedrock</h3>
+<a href="#silt-fraction" class="anchor"></a>Silt Fraction</h3>
 <blockquote>
 <p>silt fraction (of the soil material smaller than 2 mm, layers marked as oragnic material, water, bedrock and “other” were excluded) % (STATSGO)</p>
 </blockquote>
-<p><span style="color:blue">Will extract the <code>depth.bsq</code> file distributed by Penn State and compute catchment mean </span>.</p>
+<p><span style="color:blue">Will extract the <code>silt.bsq</code> file distributed by Penn State and compute catchment mean</span>.</p>
 </div>
 <div id="sand-fraction" class="section level3">
 <h3 class="hasAnchor">
@@ -240,7 +254,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <h3 class="hasAnchor">
 <a href="#saturated-hyd--conductivity" class="anchor"></a>Saturated hyd. conductivity</h3>
 <blockquote>
-<p>saturated hydraulic conductivity (estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value <span class="math display">\[36 cm/hr\]</span> for layers marked as organic material, layers marked as water, bedrock and “other” were excluded) cm/hr <a href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/WR020i006p00682">Table 4</a></p>
+<p>saturated hydraulic conductivity (estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value [36 cm/hr] for layers marked as organic material, layers marked as water, bedrock and “other” were excluded) cm/hr <a href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/WR020i006p00682">Table 4</a></p>
 </blockquote>
 <div id="x-sand---0-0064-x-clay" class="section level4">
 <h4 class="hasAnchor">
@@ -252,7 +266,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <h3 class="hasAnchor">
 <a href="#volumetric-porosity" class="anchor"></a>Volumetric porosity</h3>
 <blockquote>
-<p>volumetric porosity (saturated volumetric water content estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value <span class="math display">\[0.9\]</span> for layers marked as organic material, layers marked as water, bedrock and “other” were excluded)</p>
+<p>volumetric porosity (saturated volumetric water content estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value [0.9] for layers marked as organic material, layers marked as water, bedrock and “other” were excluded)</p>
 </blockquote>
 <div id="x-sand---0-037-x-clay" class="section level4">
 <h4 class="hasAnchor">
@@ -260,21 +274,13 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <p><span style="color:blue">Using the mean sand and clay percentages the above formula can be applied</span>.</p>
 </div>
 </div>
-<div id="soil-depth" class="section level3">
+<div id="soil-depth-to-bedrock" class="section level3">
 <h3 class="hasAnchor">
-<a href="#soil-depth" class="anchor"></a>Soil depth</h3>
+<a href="#soil-depth-to-bedrock" class="anchor"></a>Soil depth to bedrock</h3>
 <blockquote>
 <p>soil depth (maximum 1.5 m, layers marked as water and bedrock were excluded) (m)</p>
 </blockquote>
 <p><span style="color:blue">Will extract the <code>depth.bsq</code> file distributed by Penn State and compute catchment mean </span>.</p>
-</div>
-<div id="silt-fraction" class="section level3">
-<h3 class="hasAnchor">
-<a href="#silt-fraction" class="anchor"></a>Silt fraction</h3>
-<blockquote>
-<p>silt fraction (of the soil material smaller than 2 mm, layers marked as oragnic material, water, bedrock and “other” were excluded)</p>
-</blockquote>
-<p><span style="color:blue">Will extract the <code>silt.bsq</code> file distributed by Penn State and compute catchment mean </span>.</p>
 </div>
 <div id="max--water-content" class="section level3">
 <h3 class="hasAnchor">
@@ -294,7 +300,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>forest fraction</p>
 </blockquote>
-<p><span style="color:blue">Will extract the percent forest from the MODIS land cover </span>.</p>
+<p><span style="color:blue">Will extract the percent forest from the MODIS land cover fit to the 1km Soil Grid </span>.</p>
 </div>
 <div id="max--green-veg--frac--gvf" class="section level2">
 <h2 class="hasAnchor">
@@ -318,7 +324,7 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>difference between the maximum and mimumum monthly mean of the leaf area index (based on 12 monthly means)</p>
 </blockquote>
-<p><span style="color:blue">Will Use Monthly MODIS LAI </span>.</p>
+<p><span style="color:blue">Will Use Monthly MODIS LAI</span>.</p>
 </div>
 <div id="max--lai" class="section level2">
 <h2 class="hasAnchor">
@@ -326,7 +332,47 @@ Priestley-Taylor formulation calibrated for each catchment\]</span> to mean prec
 <blockquote>
 <p>maximum monthly mean of the leaf area index (based on 12 monthly means)</p>
 </blockquote>
-<p><span style="color:blue">Will Use Monthly MODIS LAI </span>.</p>
+<p><span style="color:blue">Will Use Monthly MODIS LAI</span>.</p>
+</div>
+<div id="data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data" class="anchor"></a>Data</h2>
+<div id="gridmet" class="section level3">
+<h3 class="hasAnchor">
+<a href="#gridmet" class="anchor"></a>Gridmet</h3>
+<p>var: prcp, tmax. tmin, pet <br> dimensions : 585, 1386, 810810 (nrow, ncol, ncell) <br> resolution : 0.04166667, 0.04166667 (x, y) <br> extent : -124.7875, -67.0375, 25.04583, 49.42083 (xmin, xmax, ymin, ymax) <br> crs : +proj=longlat +ellps=WGS84 +no_defs <br></p>
+</div>
+<div id="modis-lai" class="section level3">
+<h3 class="hasAnchor">
+<a href="#modis-lai" class="anchor"></a>MODIS LAI</h3>
+<p>dimensions : 862, 3283, 2829946 (nrow, ncol, ncell) <br> resolution : 0.01160146, 0.01160146 (x, y) <br> extent : -155.5724, -117.4848, 39.99954, 50 (xmin, xmax, ymin, ymax) <br> crs : +proj=longlat +a=6378249.145 +rf=293.465 +no_defs <br></p>
+</div>
+<div id="modis-lc" class="section level3">
+<h3 class="hasAnchor">
+<a href="#modis-lc" class="anchor"></a>MODIS LC</h3>
+<p>dimensions : 4970, 17121, 85091370 (nrow, ncol, ncell) <br> resolution : 0.006036802, 0.006036802 (x, y) <br> extent : -155.5724, -52.2163, 19.99709, 50 (xmin, xmax, ymin, ymax) <br> crs : +proj=longlat +a=6378249.145 +rf=293.465 +no_defs <br></p>
+</div>
+<div id="modis-ndvi" class="section level3">
+<h3 class="hasAnchor">
+<a href="#modis-ndvi" class="anchor"></a>MODIS NDVI</h3>
+<p>dimensions : 2485, 8560, 21271600 (nrow, ncol, ncell) <br> resolution : 0.0120736, 0.0120736 (x, y) <br> extent : -155.5724, -52.22233, 19.99709, 50 (xmin, xmax, ymin, ymax) <br> crs : +proj=longlat +a=6378249.145 +rf=293.465 +no_defs <br></p>
+</div>
+<div id="conus-soil" class="section level3">
+<h3 class="hasAnchor">
+<a href="#conus-soil" class="anchor"></a>CONUS Soil</h3>
+<p>dimensions : 2896, 4616, 13367936 (nrow, ncol, ncell) <br> resolution : 1000, 1000 (x, y) <br> extent : -2357000, 2259000, 277000, 3173000 (xmin, xmax, ymin, ymax) <br> crs : +proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD27 +units=m +no_defs <br></p>
+</div>
+<div id="gsrs" class="section level3">
+<h3 class="hasAnchor">
+<a href="#gsrs" class="anchor"></a>GSRS</h3>
+<p>dimensions : 18000, 43200, 777600000 (nrow, ncol, ncell) <br> resolution : 0.008333333, 0.008333333 (x, y) <br> extent : -180, 180, -60, 90 (xmin, xmax, ymin, ymax) <br> crs : +proj=longlat +datum=WGS84 +no_defs <br></p>
+</div>
+<div id="glim" class="section level3">
+<h3 class="hasAnchor">
+<a href="#glim" class="anchor"></a>GLiM</h3>
+<p>Vector Product</p>
+<p>###GLHYMPS Vector Product</p>
+</div>
 </div>
 </div>
   </div>

@@ -19,7 +19,10 @@ Imports:
     rvest,
     raster,
     tibble,
-    stringr
+    ncmeta,
+    stringr,
+    RNetCDF,
+    sys
 Suggests:
     rmarkdown,
     knitr

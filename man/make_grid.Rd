@@ -25,6 +25,7 @@ Define a grid abstraction for a file or an extent, res/dim, and projection
 }
 \seealso{
 Other grid: 
+\code{\link{geogrid_warp}()},
 \code{\link{getSubsets}()}
 }
 \concept{grid}
