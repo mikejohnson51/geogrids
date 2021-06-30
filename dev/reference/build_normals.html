@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scrape MODIS molt and mota archives — .modis_dir • geogrids</title>
+<title>Build Annual Averages and Period Normals — build_normals • geogrids</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Scrape MODIS molt and mota archives — .modis_dir" />
-<meta property="og:description" content="Scrape MODIS molt and mota archives" />
+<meta property="og:title" content="Build Annual Averages and Period Normals — build_normals" />
+<meta property="og:description" content="Calculate the annual mean from raw GridMet data for the years requested. Afterward, compute a normal for that period." />
 
 
 <meta name="robots" content="noindex">
@@ -123,26 +123,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Scrape MODIS molt and mota archives</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/geogrids/blob/master/R/modis_utils.R'><code>R/modis_utils.R</code></a></small>
-    <div class="hidden name"><code>dot-modis_dir.Rd</code></div>
+    <h1>Build Annual Averages and Period Normals</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/geogrids/blob/master/R/gridmet_utils.R'><code>R/gridmet_utils.R</code></a></small>
+    <div class="hidden name"><code>build_normals.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Scrape MODIS molt and mota archives</p>
+    <p>Calculate the annual mean from raw GridMet data for the years requested. Afterward, compute a normal for that period.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.modis_dir</span><span class='op'>(</span><span class='va'>product</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>build_normals</span><span class='op'>(</span><span class='va'>var</span>, years <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2001</span><span class='op'>:</span><span class='fl'>2020</span><span class='op'>)</span>, dir <span class='op'>=</span> <span class='fu'><a href='geo_path.html'>geo_path</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>product</th>
-      <td><p>a MODIS product</p></td>
+      <th>var</th>
+      <td><p>what variables to download (1-many)</p></td>
+    </tr>
+    <tr>
+      <th>dir</th>
+      <td><p>the directory to cache data. Default is <code><a href='geo_path.html'>geo_path()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td><p>what years (1979-2020)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>file to disk</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other gridmet: 
+<code><a href='calculate_ai.html'>calculate_ai</a>()</code>,
+<code><a href='downloadGridMET.html'>downloadGridMET</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
