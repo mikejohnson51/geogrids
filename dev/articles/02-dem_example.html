@@ -101,14 +101,14 @@
 <a href="#define-aoi" class="anchor"></a>Define AOI</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stars</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/">stars</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geogrids</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">geom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="st">"hydrofabric.gpkg"</span>, <span class="st">"catchments"</span><span class="op">)</span> 
 
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">geom</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">geom_sf</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">.01</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">geom</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">.01</span><span class="op">)</span></code></pre></div>
 <p><img src="dem-aoi-1.png" title="plot of chunk aoi" alt="plot of chunk aoi" width="100%"></p>
 </div>
 <div id="find-cachedownload-merge-and-plot-dem-data" class="section level2">
@@ -124,7 +124,7 @@
 <span class="fu">merge_rasters</span><span class="op">(</span><span class="va">files</span>, <span class="va">tmpfile</span><span class="op">)</span>
 
 <span class="co"># plot data!</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">read_stars</span><span class="op">(</span><span class="va">tmpfile</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"DEM"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html">read_stars</a></span><span class="op">(</span><span class="va">tmpfile</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"DEM"</span><span class="op">)</span></code></pre></div>
 <pre><code>## downsample set to c(75)</code></pre>
 <p><img src="dem-dem-1.png" title="plot of chunk dem" alt="plot of chunk dem" width="100%"></p>
 </div>
