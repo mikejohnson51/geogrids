@@ -23,14 +23,6 @@ Imports:
     sys,
     terra,
     utils
-Suggests: 
-    AOI,
-    devtools,
-    knitr,
-    mapview,
-    rmarkdown,
-    stars,
-    zonal
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
