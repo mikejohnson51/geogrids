@@ -95,10 +95,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/basics.html">Basic Example</a>
+      <a href="../articles/01-basics.html">Basic Example</a>
     </li>
     <li>
-      <a href="../articles/characteristics.html">Catchment Characteristics</a>
+      <a href="../articles/02-dem_example.html">DEM Example</a>
+    </li>
+    <li>
+      <a href="../articles/03-characteristics.html">Catchment Characteristics</a>
     </li>
   </ul>
 </li>
@@ -132,11 +135,15 @@
     <p>Manage cached files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geo_cache_list</span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>geo_cache_list</span><span class='op'>(</span>dir <span class='op'>=</span> <span class='fu'><a href='geo_path.html'>geo_path</a></span><span class='op'>(</span><span class='op'>)</span>, pattern <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dir</th>
+      <td><p>expected cache directory</p></td>
+    </tr>
     <tr>
       <th>pattern</th>
       <td><p>pattern to look for using list.files</p></td>
