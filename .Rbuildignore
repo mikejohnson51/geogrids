@@ -13,3 +13,4 @@
 ^pkgdown$
 ^_pkgdown\.yaml$
 workspace
+vignettes
