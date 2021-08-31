@@ -11,9 +11,6 @@ calculate_ai(years = c(2001:2020), dir = geo_path())
 
 \item{dir}{the directory to cache data. Default is \code{geo_path()}}
 }
-\value{
-
-}
 \description{
 Generate Aridity Index (PET/PR)
 }

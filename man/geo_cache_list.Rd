@@ -4,9 +4,11 @@
 \alias{geo_cache_list}
 \title{Manage cached files}
 \usage{
-geo_cache_list(pattern = NULL)
+geo_cache_list(dir = geo_path(), pattern = NULL)
 }
 \arguments{
+\item{dir}{expected cache directory}
+
 \item{pattern}{pattern to look for using list.files}
 }
 \description{

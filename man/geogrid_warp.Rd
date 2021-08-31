@@ -16,7 +16,7 @@ geogrid_warp(files, grid = NULL, r = "near", disk = TRUE)
 \item{disk}{return file paths (TRUE) or raster stack (FALSE)}
 }
 \value{
-vecotr of filepaths or raster::stack
+vector of filepaths or raster::stack
 }
 \description{
 Wrap

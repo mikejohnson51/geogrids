@@ -12,4 +12,4 @@
 ^docs$
 ^pkgdown$
 ^_pkgdown\.yaml$
-workflow
+workspace

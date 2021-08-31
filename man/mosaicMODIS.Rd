@@ -42,6 +42,7 @@ resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults a
 }
 \seealso{
 Other modis: 
+\code{\link{.modis_dir}()},
 \code{\link{day8_to_month}()},
 \code{\link{downloadMODIS}()}
 }

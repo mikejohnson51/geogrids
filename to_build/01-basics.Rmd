@@ -1,0 +1,90 @@
+---
+title: "Basic Example"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic Example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  out.width = "100%",
+  fig.width = 7, 
+  fig.height = 4, dpi = 150, fig.path = "base",
+  message = FALSE, warning = FALSE, error = FALSE
+)
+```
+
+# Define Area of Interest and Aggregation Units
+
+```{r aoi, echo = FALSE}
+library(zonal)
+library(geogrids)
+library(dplyr)
+
+base  = geo_path()
+AOI   = AOI::aoi_get(state = "south", county = "all")
+plot(AOI$geometry)
+```
+
+# Find cached geogrids 
+
+```{r}
+cache = geo_cache_list()
+
+ai_norm = cache %>% 
+  filter(grepl('ai_normal', fullname)) %>% 
+  pull(fullname)
+
+soil_files = cache %>% 
+  filter(grepl('silt-1m-percent.tif', fullname)) %>% 
+  pull(fullname)
+```
+
+# Disparate Grids 😢
+
+```{r}
+make_grid(ai_norm)
+
+make_grid(soil_files)
+```
+
+# Warp AI to soils and execute Zonal
+
+```{r}
+system.time({
+  out   = geogrid_warp(ai_norm, make_grid(soil_files[1]), disk = TRUE)
+  sta   = terra::rast(c(out, soil_files))
+  oo    = execute_zonal(sta, AOI, "geoid")
+})
+
+
+head(oo)
+```
+```{r}
+w = weighting_grid(sta, AOI, "geoid")
+
+new = cache %>% 
+  filter(grepl('silt-1m-percent.tif|sand-1m-percent.tif|clay-1m-percent.tif', fullname)) 
+
+sta = 
+system.time({
+  oo    = execute_zonal(c(new$fullname, out), w = w,)
+})
+
+
+oo=setNames(oo, c("geoid", "clay", "sand", "silt", "AI"))
+
+head(oo)
+```
+
+# Results
+
+```{r map, echo = FALSE}
+a = merge(AOI, oo)
+plot(a[c("clay", "sand", "silt", "AI")], border = FALSE)
+```
+
+
+

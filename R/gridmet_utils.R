@@ -38,7 +38,7 @@ downloadGridMET = function(var, year, dir = geo_path()){
 #' Build Annual Averages and Period Normals
 #' @description Calculate the annual mean from raw GridMet data for the years requested. Afterward, compute a normal for that period.
 #' @param var what variables to download (1-many)
-#' @param year what years (1979-2020)
+#' @param years what years (1979-2020)
 #' @param dir the directory to cache data. Default is `geo_path()`
 #' @return file to disk
 #' @export
@@ -94,9 +94,8 @@ build_normals = function(var,  years = c(2001:2020), dir = geo_path()){
 #' Generate Aridity Index (PET/PR)
 #' @param years what years (1979-2020). `pr` and `pet` data must already be downloaded. See `downloadGridMET()`.
 #' @param dir the directory to cache data. Default is `geo_path()`
-#' @return
 #' @export
-#' @importFrom raster raster writeRaster
+#' @importFrom terra writeRaster
 #' @family gridmet
 
 calculate_ai = function(years = c(2001:2020), dir = geo_path()){

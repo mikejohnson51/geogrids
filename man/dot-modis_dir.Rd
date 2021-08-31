@@ -12,3 +12,10 @@
 \description{
 Scrape MODIS molt and mota archives
 }
+\seealso{
+Other modis: 
+\code{\link{day8_to_month}()},
+\code{\link{downloadMODIS}()},
+\code{\link{mosaicMODIS}()}
+}
+\concept{modis}

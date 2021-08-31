@@ -19,12 +19,13 @@ geo_path <- function(){
 
 #' Manage cached files
 #' @export
+#' @param dir expected cache directory
 #' @param pattern pattern to look for using list.files
 #' @export
 #' @importFrom dplyr tibble
 #' @family cache
 
-geo_cache_list <- function(pattern = NULL) {
+geo_cache_list <- function(dir = geo_path(), pattern = NULL) {
   ts = tibble(fullname = list.files(geo_path(), pattern = pattern, ignore.case = TRUE,
              recursive = TRUE, full.names = TRUE))
   ts$subdir   = gsub(geo_path(), "", dirname(ts$fullname))

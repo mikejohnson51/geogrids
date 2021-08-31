@@ -9,9 +9,9 @@ build_normals(var, years = c(2001:2020), dir = geo_path())
 \arguments{
 \item{var}{what variables to download (1-many)}
 
-\item{dir}{the directory to cache data. Default is \code{geo_path()}}
+\item{years}{what years (1979-2020)}
 
-\item{year}{what years (1979-2020)}
+\item{dir}{the directory to cache data. Default is \code{geo_path()}}
 }
 \value{
 file to disk

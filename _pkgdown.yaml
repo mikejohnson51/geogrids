@@ -29,3 +29,7 @@ reference:
   desc: Basic utilities for downloading and processing snow data
 - contents:
   - has_concept("snow")
+- title: Elevation
+  desc: Basic utilities for downloading and processing NED
+- contents:
+  - has_concept("Elevation")

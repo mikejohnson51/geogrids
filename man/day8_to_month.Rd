@@ -30,6 +30,7 @@ mean((tile / 8)) / days_in_month
 }
 \seealso{
 Other modis: 
+\code{\link{.modis_dir}()},
 \code{\link{downloadMODIS}()},
 \code{\link{mosaicMODIS}()}
 }

@@ -13,6 +13,6 @@ jennings_snow_threshold(dir = geo_path())
 file to Jennings Snow Threshold
 }
 \description{
-Jennings Snow Threshold
+\href{https://doi.org/10.5061/dryad.c9h35}{Jennings, Keith S.; Winchell, Taylor S.; Livneh, Ben; Molotch, Noah P. (2019), Data from: Spatial variation of the rain-snow temperature threshold across the Northern Hemisphere, Dryad, Dataset, }
 }
 \concept{snow}

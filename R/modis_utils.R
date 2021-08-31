@@ -2,6 +2,7 @@
 #' @param product a MODIS product
 #' @importFrom rvest read_html html_nodes html_attr
 #' @importFrom dplyr `%>%`
+#' @family modis
 #' @export
 
 .modis_dir = function(product){
@@ -206,6 +207,7 @@ mosaicMODIS = function(dir = geo_path(),
 
   df   = tibble(dir = list.dirs(home)) %>%
     dplyr::mutate(subdir = basename(dir)) %>%
+    dplyr::filter(!subdir %in% c("raw", "mosaics")) %>%
     dplyr::filter(between(as.Date(subdir), as.Date(date[1]), as.Date(date[2]))) %>%
     dplyr::mutate(dest = file.path(outdir, paste0(prefix, "_", subdir, ext)))
 
@@ -272,7 +274,7 @@ day8_to_month = function(dir = geo_path(),
 
   if(!is.null(date)){
     df =  df %>%
-      dplyr::filter(month %in% unique(format(as.Date(NULL), "%m"))) %>%
+      dplyr::filter(month %in% unique(format(as.Date(date), "%m"))) %>%
       dplyr::filter(year %in% unique(format(as.Date(date), "%Y")))
   }
 
@@ -292,8 +294,8 @@ day8_to_month = function(dir = geo_path(),
 
     if(!file.exists(dest) | all(overwrite, file.exists(dest))){
       suppressWarnings({
-        o = (raster::mean(raster::stack(subs$files)/8) * subs$days_in_month[1])
-        raster::writeRaster(o,dest)
+        o = (terra::mean(terra::rast(subs$files)/8) * subs$days_in_month[1])
+        terra::writeRaster(o,dest)
       })
       message(subs$subdir[1], " complete")
     } else {
