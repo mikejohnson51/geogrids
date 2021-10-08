@@ -79,25 +79,25 @@ mosaicMODIS(dir = geo_path(),
 # LC ---------------------------------------------------------
 # Yearly product
 product = 'MCD12Q1.006'
-dir = file.path(main_dir, product, 'raw')
+dir = file.path(main_dir,  "MODIS", product, 'raw')
 fs::dir_create(dir)
 
 downloadMODIS(AOI,
               product,
-              startDate = "2019-01-01",
-              dir,
-              base.url = 'https://e4ftl01.cr.usgs.gov/MOTA/')
+              date = "2001-01-01",
+              dir)
 
-patterns = getSubsets(list.files(dir, recursive = TRUE, full = TRUE)[1])
+patterns = getSubsets(list.files(dir, recursive = TRUE, full.names = TRUE)[1])
 
 ## Usings SOIL 1 km grid
-mosaicMODIS(dir,
-            outDir = file.path(main_dir, product, 'conus'),
+mosaicMODIS(dir = geo_path(),
+            prefix = "landcover",
+            product = product,
+            date = c("2019-01-01"),
             pattern = patterns[1],
-            te = c(-2357000, 277000, 2259000, 3173000),
-            tr = c(1000,1000),
-            t_srs = '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD27 +units=m +no_defs +ellps=clrk66',
-            method = "near")
+            grid = modis_lc,
+            r = "near")
+
 
 complete_netcdf(dir = file.path(main_dir, product, 'conus/'),
                 out = file.path(main_dir, product, paste0(product, ".nc")) ,

@@ -66,7 +66,7 @@ downloadMODIS = function(AOI,
   message(length(dates), " date(s) covers this period")
 
   tmpdir = file.path(dir, "MODIS", product, "raw")
-  dir.create(tmpdir, showWarnings = FALSE)
+  dir.create(tmpdir, showWarnings = FALSE, recursive = TRUE)
 
   ts = tibble(fullname = list.files(tmpdir,
                                     ignore.case = TRUE,
@@ -78,12 +78,16 @@ downloadMODIS = function(AOI,
   ts$basename = basename(ts$fullname)
 
   oo = ts %>%
-    dplyr::filter(between(as.Date(subdir), as.Date(date[1]), as.Date(date[2]))) %>%
-    dplyr::filter(grepl(paste(tiles, collapse = "|"), basename)) %>%
-    dplyr::group_by(subdir) %>%
-    dplyr::summarise(count = n())
+      dplyr::filter(between(as.Date(subdir), as.Date(date[1]), as.Date(date[2]))) %>%
+      dplyr::filter(grepl(paste(tiles, collapse = "|"), basename)) %>%
+      dplyr::group_by(subdir) %>%
+      dplyr::summarise(count = n())
 
-  dates_to_process = dates[!dates %in% as.Date(oo$subdir) | oo$count != length(tiles)]
+  if(nrow(oo) == 0){
+    dates_to_process = dates
+  } else {
+    dates_to_process = dates[!dates %in% as.Date(oo$subdir) | oo$count != length(tiles)]
+  }
 
   need =  dates_to_process[!dir.exists(file.path(tmpdir, dates_to_process))]
 
