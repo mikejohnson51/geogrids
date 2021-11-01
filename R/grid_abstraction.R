@@ -69,7 +69,7 @@ geogrid_warp = function(files, grid = NULL, r = "near", disk = TRUE){
   o = sapply(1:length(files), function(x){
     sf::gdal_utils("warp",
                    source = files[x],
-                   dest   = tmps[x],
+                   destination   = tmps[x],
                    options = c("-of", "GTiff",
                                "-te", grid$ext,
                                "-tr", grid$resXY,
