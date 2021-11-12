@@ -71,7 +71,7 @@ geogrid_warp = function(file, grid = NULL, r = "near", filename = NULL){
     file_og = file
   }
 
-  if(!is.null(filename)){
+  if(is.null(filename)){
     filename = tempfile(pattern = "new", fileext = ".tif")
   }
 
