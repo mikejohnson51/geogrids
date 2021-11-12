@@ -26,7 +26,7 @@ geo_path <- function(){
 #' @family cache
 
 geo_cache_list <- function(dir = geo_path(), pattern = NULL) {
-  ts = tibble(fullname = list.files(geo_path(), pattern = pattern, ignore.case = TRUE,
+  ts = tibble(fullname = list.files(dir, pattern = pattern, ignore.case = TRUE,
              recursive = TRUE, full.names = TRUE))
   ts$subdir   = gsub(geo_path(), "", dirname(ts$fullname))
   ts$basename = basename(ts$fullname)

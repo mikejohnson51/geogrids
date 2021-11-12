@@ -128,8 +128,7 @@ downloadMODIS = function(AOI,
 #' @param file a HDF file path
 #' @param product a MODIS product name
 #' @export
-#' @importFrom sf gdal_utils
-#' @importFrom utils glob2rx
+#' @importFrom terra rast
 #' @family grid
 
 getSubsets = function(file = NULL, product = NULL){
@@ -145,32 +144,24 @@ getSubsets = function(file = NULL, product = NULL){
 
   if(!file.exists(file)){stop("File not found.")}
 
-  gdalinfo_raw <- sf::gdal_utils(util = "info", file, quiet  = TRUE)
-  rr = strsplit(gdalinfo_raw, "\\n")[[1]]
-
-  subdataset_rawnames <-  rr[grepl(glob2rx("*SUBDATASET*NAME*"), rr)]
-  subdataset_names <- sapply(X = seq(length(subdataset_rawnames)),
-                             FUN = function(X) {
-                               split1 <- strsplit(subdataset_rawnames[X], "=")
-                               return(gsub("\"", "", split1[[1]][2]))
-                             })
-
-  gsub(file,"[file]",subdataset_names)
+  names(terra::rast(file))
 }
+
 
 #' Mosaic/Warp Raw MODIS Tiles
 #' @description Mosaics all MODIS HDF files for a given date to a new file with a flexible extent (te),
 #' resolution (tr), CRS (t_srs). If GDAL options are left NULL, the GDAL defaults are used.
 #' @param dir the directory to cache data. Default is `geo_path()`
-#' @param prefix the prefix for the outputfiles, shoudl be specfic to the requested grid
 #' @param product the MODIS product to search for
-#' @param pattern the HDF file pattern to extract (see `getSubsets()`)
 #' @param date the date of the mosaic to build passed as a vector of length 1 (single date), or
 #' 2 (range of dates)
+#' @param pattern the HDF file pattern to extract (see `getSubsets()`)
 #' @param grid a grid abstraction build with `make_grid()`
-#' @param of GDAL output file type (default = GTiff)
 #' @param r GDAL resampling method
 #' @param overwrite should the files be overwriten?
+#' @param  scale_factor product scale factor
+#' @param range valid data range
+#' @param cog should a COG directory be built?
 #' @export
 #' @importFrom dplyr mutate filter between tibble
 #' @importFrom stringr str_replace
@@ -178,14 +169,15 @@ getSubsets = function(file = NULL, product = NULL){
 #' @family modis
 
 mosaicMODIS = function(dir = geo_path(),
-                       prefix = "",
                        product,
                        date = NULL,
                        pattern = NULL,
                        grid = NULL,
                        r = "near",
                        overwrite = FALSE,
-                       of = "GTiff"){
+                       scale_factor = 1,
+                       range = NULL,
+                       cog = TRUE){
 
   subdir <- dest <- NULL
 
@@ -193,10 +185,10 @@ mosaicMODIS = function(dir = geo_path(),
   if(length(date) == 1){ date = c(date, date) }
 
   if(is.null(grid)){
-    options = c("-of", of,
+    options = c("-of", "GTiff",
                 "-r", r)
   } else {
-    options = c("-of", of,
+    options = c("-of", "GTiff",
                 "-te", grid$ext,
                 "-tr", grid$resXY,
                 "-t_srs", grid$prj,
@@ -204,16 +196,22 @@ mosaicMODIS = function(dir = geo_path(),
   }
 
   home   =  file.path(dir, "MODIS", product, "raw")
-  outdir = file.path(dir,  "MODIS", product, "mosaics")
+  tifs   =  file.path(dir, "MODIS", product, "tiffs")
+  cogs   =  file.path(dir, "MODIS", product, "mosaics_cog")
+  outdir =  file.path(dir, "MODIS", product, "mosaic")
+  dir.create(home, showWarnings = FALSE)
+  dir.create(tifs, showWarnings = FALSE)
   dir.create(outdir, showWarnings = FALSE)
+  if(cog) { dir.create(cogs, showWarnings = FALSE) }
 
-  ext = ifelse(of == "GTiff", ".tif", ".nc")
+  ext = ".tif" #ifelse(of == "GTiff", ".tif", ".nc")
 
   df   = tibble(dir = list.dirs(home)) %>%
     dplyr::mutate(subdir = basename(dir)) %>%
     dplyr::filter(!subdir %in% c("raw", "mosaics")) %>%
     dplyr::filter(between(as.Date(subdir), as.Date(date[1]), as.Date(date[2]))) %>%
-    dplyr::mutate(dest = file.path(outdir, paste0(prefix, "_", subdir, ext)))
+    dplyr::mutate(dest = file.path(outdir, paste0(subdir, ext))) %>%
+    dplyr::mutate(cog = file.path(cogs, paste0(subdir, ext)))
 
   if(!overwrite){
     df = dplyr::filter(df, !file.exists(dest))
@@ -223,16 +221,42 @@ mosaicMODIS = function(dir = geo_path(),
 
   for(i in 1:nrow(df)){
 
-    files = stringr::str_replace(pattern,
-                                 "\\[file\\]",
-                                 list.files(df$dir[i], full.names = TRUE))
+    xx = list.files(df$dir[i], full.names = TRUE)
+    sub = file.path(tifs, df$subdir[i])
+    dir.create(sub, showWarnings = FALSE)
 
-    unlink(df$dest[i])
+    for(j in 1:length(xx)){
+      ss =  terra::rast(xx[j])[[pattern]]
+      ss = ss * scale_factor
 
-    sf::gdal_utils(util = "warp",
-                   source = files,
+      if(!is.null(range)){
+        ss =  terra::clamp(ss, lower = min(range), upper = max(range), values = FALSE)
+      }
+
+      out = strsplit(basename(xx[j]), "[.]")[[1]]
+
+      outfile = file.path(sub, paste0(out[3], "_",
+                                      strsplit(pattern, "[:]")[[1]][2], ".tif"))
+      terra::writeRaster(ss,  outfile, overwrite = TRUE)
+    }
+
+  unlink(df$dest[i])
+  sf::gdal_utils(util = "warp",
+                   source =  list.files(sub, full.names = TRUE),
                    destination  = df$dest[i],
                    options = options)
+
+
+  if(cog){
+    unlink(df$cog[i])
+   sf::gdal_utils("translate",
+                  source = df$dest[i],
+                  destination  = df$cog[i],
+                  options = c("-co", "TILED=YES",
+                              "-co",  "COPY_SRC_OVERVIEWS=YES",
+                              "-co",  "COMPRESS=DEFLATE"))
+
+  }
 
     message(product, ": ", df$subdir[i])
   }
@@ -241,73 +265,91 @@ mosaicMODIS = function(dir = geo_path(),
 #' 8day to monthly mean
 #' @description takes 8 day MODIS tiles and generates a monthly mean
 #' mean((tile / 8)) / days_in_month
-#' @param dir the directory to cache data. Default is `geo_path()`
-#' @param product the MODIS product to search
+#' @param dir the directory with 8 day data
+#' @param measurement are the 8 day files a single best `representative` (default) or a daily `sum`
 ##' @param date the date of the months to process to build passed as a vector of length 1 (single date),
 ##' or 2 (range of dates)
 #' @param overwrite should the files be overwriten?
-#' @param prefix the prefix to search for
+#' @param cog should a COG file (Cloud Optimized Geotif) be produced?
+
 #' @export
 #' @importFrom raster stack writeRaster mean
 #' @importFrom dplyr filter group_indices mutate group_by
 #' @family modis
 
-day8_to_month = function(dir = geo_path(),
-                         product = NULL,
+day8_to_month = function(dir = '/Volumes/Transcend/ngen/MODIS/MOD15A2H.006/mosaics_cogs',
+                         measurement = "representative",
                          date = NULL,
-                         prefix = NULL,
-                         overwrite = FALSE){
+                         overwrite = FALSE,
+                         cog = TRUE){
 
   files <- subdir <- month <- year <- g <- NULL
 
   if(length(date) == 1){ date = c(date, date) }
 
-  here = file.path(dir, "MODIS", product, "mosaics")
-
-  out = file.path(dir, "MODIS", product, "monthly_means")
+  out = file.path(dirname(dir), "monthly_mean")
   dir.create(out, showWarnings = FALSE)
+  cog_dir = file.path(dirname(dir), "monthly_mean_cog")
+  if(cog) { dir.create(cog_dir, showWarnings = FALSE) }
 
-  df = tibble(files = list.files(here, recursive = TRUE, pattern = prefix,  full.names = TRUE))
-  if(is.null(prefix)){ prefix = ""}
-
-  df = df %>%
+  df = tibble(files = list.files(dir, pattern = ".tif$", full.names = TRUE)) %>%
     mutate(subdir  = gsub(".tif", "", basename(files)),
-           subdir  = gsub(paste0(prefix, "_"), "", subdir),
+           subdir  = subdir,
            year    = format(as.Date(subdir), "%Y"),
            month   = format(as.Date(subdir), "%m"))
 
   if(!is.null(date)){
+    dates  = seq.Date(as.Date(date[1]), as.Date(date[2]), by = "m")
     df =  df %>%
-      dplyr::filter(month %in% unique(format(as.Date(date), "%m"))) %>%
-      dplyr::filter(year %in% unique(format(as.Date(date), "%Y")))
+      dplyr::filter(month %in% unique(format(dates, "%m"))) %>%
+      dplyr::filter(year %in% unique(format(dates, "%Y")))
   }
-
 
   df = df %>%
     group_by(year,month) %>%
     mutate(subdir = paste(year,month,"01", sep = "-")) %>%
-    mutate(days_in_month = .ndays(subdir))
-
-  df$g = dplyr::group_indices(df)
+    mutate(days_in_month = .ndays(subdir),
+           g = dplyr::cur_group_id())
 
   message(length(unique(df$g)), " months to process...")
 
   for(i in unique(df$g)){
     subs   = filter(df, g == i)
-    dest = file.path(out, basename(subs$files[1]))
+    dest  = file.path(out, paste0(subs$year[1], "-", subs$month[1], ".tif"))
 
     if(!file.exists(dest) | all(overwrite, file.exists(dest))){
-      suppressWarnings({
-        o = (terra::mean(terra::rast(subs$files)/8) * subs$days_in_month[1])
-        terra::writeRaster(o,dest)
-      })
+
+      if(measurement == "sum"){
+        suppressWarnings({
+          o = (terra::mean(terra::rast(subs$files) / 8) * subs$days_in_month[1])
+          terra::writeRaster(o, dest, overwrite = TRUE)
+        })
+      } else {
+        suppressWarnings({
+          o = terra::mean(terra::rast(subs$files), na.rm = TRUE)
+          terra::writeRaster(o, dest, overwrite = TRUE)
+        })
+      }
+
+
+      if(cog){
+          dest_cog  = file.path(cog_dir, paste0(subs$year[1], "-", subs$month[1], ".tif"))
+          unlink(dest_cog)
+          sf::gdal_utils("translate",
+                         source = dest,
+                         destination  = dest_cog,
+                         options = c("-co", "TILED=YES",
+                                     "-co",  "COPY_SRC_OVERVIEWS=YES",
+                                     "-co",  "COMPRESS=DEFLATE"))
+
+        }
+
+
       message(subs$subdir[1], " complete")
     } else {
       message(subs$subdir[1], " exists")
     }
   }
-
-
 }
 
 .ndays <- function(d) {

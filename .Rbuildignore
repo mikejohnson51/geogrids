@@ -14,3 +14,5 @@
 ^_pkgdown\.yaml$
 workspace
 vignettes
+figure
+to_build

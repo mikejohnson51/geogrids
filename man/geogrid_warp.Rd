@@ -4,19 +4,19 @@
 \alias{geogrid_warp}
 \title{Wrap}
 \usage{
-geogrid_warp(files, grid = NULL, r = "near", disk = TRUE)
+geogrid_warp(file, grid = NULL, r = "near", filename = NULL)
 }
 \arguments{
-\item{files}{a vector of files paths}
+\item{file}{a vector of files paths}
 
 \item{grid}{a grid abstraction to warp to (see \code{make_grid()})}
 
 \item{r}{resampling method see gdalwarp for options}
 
-\item{disk}{return file paths (TRUE) or raster stack (FALSE)}
+\item{filename}{character. Output filename}
 }
 \value{
-vector of filepaths or raster::stack
+SpatRast object
 }
 \description{
 Wrap

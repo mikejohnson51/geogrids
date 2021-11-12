@@ -5,24 +5,24 @@
 \title{8day to monthly mean}
 \usage{
 day8_to_month(
-  dir = geo_path(),
-  product = NULL,
+  dir = "/Volumes/Transcend/ngen/MODIS/MOD15A2H.006/mosaics_cogs",
+  measurement = "representative",
   date = NULL,
-  prefix = NULL,
-  overwrite = FALSE
+  overwrite = FALSE,
+  cog = TRUE
 )
 }
 \arguments{
-\item{dir}{the directory to cache data. Default is \code{geo_path()}}
+\item{dir}{the directory with 8 day data}
 
-\item{product}{the MODIS product to search}
+\item{measurement}{are the 8 day files a single best \code{representative} (default) or a daily \code{sum}}
 
 \item{date}{the date of the months to process to build passed as a vector of length 1 (single date),
 or 2 (range of dates)}
 
-\item{prefix}{the prefix to search for}
-
 \item{overwrite}{should the files be overwriten?}
+
+\item{cog}{should a COG file (Cloud Optimized Geotif) be produced?}
 }
 \description{
 takes 8 day MODIS tiles and generates a monthly mean

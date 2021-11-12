@@ -6,20 +6,19 @@
 \usage{
 mosaicMODIS(
   dir = geo_path(),
-  prefix = "",
   product,
   date = NULL,
   pattern = NULL,
   grid = NULL,
   r = "near",
   overwrite = FALSE,
-  of = "GTiff"
+  scale_factor = 1,
+  range = NULL,
+  cog = TRUE
 )
 }
 \arguments{
 \item{dir}{the directory to cache data. Default is \code{geo_path()}}
-
-\item{prefix}{the prefix for the outputfiles, shoudl be specfic to the requested grid}
 
 \item{product}{the MODIS product to search for}
 
@@ -34,7 +33,11 @@ mosaicMODIS(
 
 \item{overwrite}{should the files be overwriten?}
 
-\item{of}{GDAL output file type (default = GTiff)}
+\item{scale_factor}{product scale factor}
+
+\item{range}{valid data range}
+
+\item{cog}{should a COG directory be built?}
 }
 \description{
 Mosaics all MODIS HDF files for a given date to a new file with a flexible extent (te),

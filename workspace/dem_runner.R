@@ -11,6 +11,7 @@ hucs = read_sf(gdb, 'WBDHU2') %>%
   dplyr::filter(huc2 <= 18) %>%
   dplyr::select(huc2)
 
+i = 12
 
 for(i in 1:18){
   AOI = hucs[i,] %>% st_make_valid()
@@ -18,8 +19,8 @@ for(i in 1:18){
   output =   paste0('/Volumes/Transcend/ngen/DEM/huc', AOI$huc2,'-res-1.tif')
 
   if(!file.exists(output)){
-    files = get_ned(AOI, res = '1')
-    merge_rasters(files, output_raster = output)
+    files = geogrids::get_ned(AOI, res = '1')
+    geogrids:::merge_rasters(files, output_raster = output)
   }
 
   message(i)

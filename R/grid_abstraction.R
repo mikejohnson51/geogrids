@@ -52,35 +52,39 @@ make_grid = function(file = NULL,
 
 
 #' Wrap
-#' @param files a vector of files paths
+#' @param file a vector of files paths
 #' @param grid a grid abstraction to warp to (see `make_grid()`)
 #' @param r resampling method see gdalwarp for options
-#' @param disk return file paths (TRUE) or raster stack (FALSE)
-#' @return vector of filepaths or raster::stack
+#' @param filename character. Output filename
+#' @return SpatRast object
 #' @export
 #' @importFrom sf gdal_utils
-#' @importFrom raster stack
+#' @importFrom terra rast
 #' @family grid
 
-geogrid_warp = function(files, grid = NULL, r = "near", disk = TRUE){
+geogrid_warp = function(file, grid = NULL, r = "near", filename = NULL){
 
-  tmps = tempfile(basename(files),fileext = ".tif")
+  if(grepl("Rast", class(file))){
+    file_og = tempfile(pattern = "og", fileext = ".tif")
+    terra::writeRaster(file, file_og)
+  } else {
+    file_og = file
+  }
 
-  o = sapply(1:length(files), function(x){
-    sf::gdal_utils("warp",
-                   source = files[x],
-                   destination   = tmps[x],
+  if(!is.null(filename)){
+    filename = tempfile(pattern = "new", fileext = ".tif")
+  }
+
+  sf::gdal_utils("warp",
+                   source = file_og,
+                   destination   = filename,
                    options = c("-of", "GTiff",
                                "-te", grid$ext,
                                "-tr", grid$resXY,
                                "-t_srs", grid$prj,
                                "-r", r))
-  })
 
-  if(disk){
-    return(tmps)
-  } else {
-    return(raster::stack(tmps))
-  }
+  return(terra::rast(filename))
+
 }
 
