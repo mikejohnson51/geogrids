@@ -135,13 +135,13 @@
     <p>Wrap</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geogrid_warp</span><span class='op'>(</span><span class='va'>files</span>, grid <span class='op'>=</span> <span class='cn'>NULL</span>, r <span class='op'>=</span> <span class='st'>"near"</span>, disk <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>geogrid_warp</span><span class='op'>(</span><span class='va'>file</span>, grid <span class='op'>=</span> <span class='cn'>NULL</span>, r <span class='op'>=</span> <span class='st'>"near"</span>, filename <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>files</th>
+      <th>file</th>
       <td><p>a vector of files paths</p></td>
     </tr>
     <tr>
@@ -153,14 +153,14 @@
       <td><p>resampling method see gdalwarp for options</p></td>
     </tr>
     <tr>
-      <th>disk</th>
-      <td><p>return file paths (TRUE) or raster stack (FALSE)</p></td>
+      <th>filename</th>
+      <td><p>character. Output filename</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>vector of filepaths or raster::stack</p>
+    <p>SpatRast object</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other grid: 
