@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,16 +41,10 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mikejohnson51/geogrids/">
+  <a href="https://github.com/mikejohnson51/geogrids/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -89,7 +85,7 @@
       <h1 data-toc-skip>Catchment Characteristics</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mikejohnson51/geogrids/blob/master/vignettes/03-characteristics.Rmd"><code>vignettes/03-characteristics.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mikejohnson51/geogrids/blob/HEAD/vignettes/03-characteristics.Rmd" class="external-link"><code>vignettes/03-characteristics.Rmd</code></a></small>
       <div class="hidden name"><code>03-characteristics.Rmd</code></div>
 
     </div>
@@ -100,18 +96,18 @@
 <p>The LSTM model is a novel way to apply machine learning principles to hydrologic prediction. The attributes presenting in Addor et al. have proven useful for LSTM modeling. As part of the NextGen framework, we want to be able to test the performance of LSTM models for various catchments.</p>
 <p>This means we need a way to quickly produce the needed catchment attributes, for a given hydrofabric which provides an ideal use case for <code>geogrids</code> and <code>zonal</code>. Here we document the attributes and the way they are processed for a NextGen hydrofabric covering HUC-01.</p>
 <p>This process is being added to the <code>hydroresolve</code> workflow for creating and releasing refactored and aggregated catchment networks that conform to the HY_Features standard.</p>
-<div id="define-hydrofabric" class="section level2">
-<h2 class="hasAnchor">
-<a href="#define-hydrofabric" class="anchor"></a>Define Hydrofabric</h2>
+<div class="section level2">
+<h2 id="define-hydrofabric">Define Hydrofabric<a class="anchor" aria-label="anchor" href="#define-hydrofabric"></a>
+</h2>
 </div>
-<div id="section" class="section level2 tabset tabset-fade tabset-pills">
-<h2></h2>
-<div id="rain" class="section level3 tabset tabset-fade">
-<h3 class="hasAnchor">
-<a href="#rain" class="anchor"></a>Rain</h3>
-<div id="mean-precipitation" class="section level4">
-<h4 class="hasAnchor">
-<a href="#mean-precipitation" class="anchor"></a><strong>Mean precipitation</strong>
+<div class="section level2 tabset tabset-fade tabset-pills">
+<h2 id="section"></h2>
+<div class="section level3 tabset tabset-fade">
+<h3 id="rain">Rain<a class="anchor" aria-label="anchor" href="#rain"></a>
+</h3>
+<div class="section level4">
+<h4 id="mean-precipitation">
+<strong>Mean precipitation</strong><a class="anchor" aria-label="anchor" href="#mean-precipitation"></a>
 </h4>
 <blockquote>
 <p>Mean daily precipitation (mm/day)</p>
@@ -119,28 +115,28 @@
 <p><span style="color:orange">We use daily GridMet files from 2018-2020.</span>.</p>
 <p><img src="../workspace/img/meanPPT.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="50%"></p>
 </div>
-<div id="snowfall-fraction" class="section level4">
-<h4 class="hasAnchor">
-<a href="#snowfall-fraction" class="anchor"></a><strong>Snowfall Fraction</strong>
+<div class="section level4">
+<h4 id="snowfall-fraction">
+<strong>Snowfall Fraction</strong><a class="anchor" aria-label="anchor" href="#snowfall-fraction"></a>
 </h4>
 <blockquote>
 <p>Fraction of precipitation falling as snow</p>
 </blockquote>
-<p><span style="color:orange">We use the daily GridMet files for tmin_* and tmax_* to create tavg_*. We use a temperature threshold following Keith Jenning’s <a href="https://www.nature.com/articles/s41467-018-03629-7">paper</a> and the data found <a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.c9h35">here</a>. With this temperature threshold, we partition all PPT values into daily snow/rain. Total snow and precipitation are computed for each basin, and the fraction of Snow to PPT is computed. </span></p>
+<p><span style="color:orange">We use the daily GridMet files for tmin_* and tmax_* to create tavg_*. We use a temperature threshold following Keith Jenning’s <a href="https://www.nature.com/articles/s41467-018-03629-7" class="external-link">paper</a> and the data found <a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.c9h35" class="external-link">here</a>. With this temperature threshold, we partition all PPT values into daily snow/rain. Total snow and precipitation are computed for each basin, and the fraction of Snow to PPT is computed. </span></p>
 <p><img src="../workspace/../workspace/img/snowfrac.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="50%"></p>
 </div>
-<div id="seasonality" class="section level4">
-<h4 class="hasAnchor">
-<a href="#seasonality" class="anchor"></a><strong>Seasonality</strong>
+<div class="section level4">
+<h4 id="seasonality">
+<strong>Seasonality</strong><a class="anchor" aria-label="anchor" href="#seasonality"></a>
 </h4>
 <blockquote>
-<p>Seasonality and timing of precipitation (estimated using sine curves to represent the annual temperature and preciptiation cycles, positive [negative] values indicate that precipitation peaks in summer [winter], values close to 0 indicate uniform precipitation (<a href="https://www.sciencedirect.com/science/article/pii/S030917080900102X">eq 14</a>)</p>
+<p>Seasonality and timing of precipitation (estimated using sine curves to represent the annual temperature and preciptiation cycles, positive [negative] values indicate that precipitation peaks in summer [winter], values close to 0 indicate uniform precipitation (<a href="https://www.sciencedirect.com/science/article/pii/S030917080900102X" class="external-link">eq 14</a>)</p>
 </blockquote>
 <p><span style="color:red">NOT SURE YET.</span></p>
 </div>
-<div id="high-frequency" class="section level4">
-<h4 class="hasAnchor">
-<a href="#high-frequency" class="anchor"></a><strong>High Frequency</strong>
+<div class="section level4">
+<h4 id="high-frequency">
+<strong>High Frequency</strong><a class="anchor" aria-label="anchor" href="#high-frequency"></a>
 </h4>
 <blockquote>
 <p>Frequency of high precipitation days (≥5 times mean daily precipitation) (days/year)</p>
@@ -148,9 +144,9 @@
 <p><span style="color:orange"> Basin wide meanPPT is multiplied by 5 and used to classify each day as “intense” (TRUE) or not (FALSE). The sum of “intense” days is computed for each basin and divided by the number of years processed</span>.</p>
 <p><img src="../workspace/img/high_ppt_freq.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="50%"></p>
 </div>
-<div id="low-frequency" class="section level4">
-<h4 class="hasAnchor">
-<a href="#low-frequency" class="anchor"></a><strong>Low Frequency</strong>
+<div class="section level4">
+<h4 id="low-frequency">
+<strong>Low Frequency</strong><a class="anchor" aria-label="anchor" href="#low-frequency"></a>
 </h4>
 <blockquote>
 <p>frequency of dry days (&lt;1 mm/day) (days/year)</p>
@@ -158,9 +154,9 @@
 <p><span style="color:orange"> Daily PPT is defined as “low” (TRUE) or not (FALSE) based on if it is larger the 1mm. The sum of “low” days is computed for each basin and divided by the number of years processed </span>.</p>
 <p><img src="../workspace/img/low_ppt_freq.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="50%"></p>
 </div>
-<div id="high-duration" class="section level4">
-<h4 class="hasAnchor">
-<a href="#high-duration" class="anchor"></a><strong>High Duration</strong>
+<div class="section level4">
+<h4 id="high-duration">
+<strong>High Duration</strong><a class="anchor" aria-label="anchor" href="#high-duration"></a>
 </h4>
 <blockquote>
 <p>average duration of high precipitation events (number of consecutive days ≥5 times mean daily precipitation) (days)</p>
@@ -168,9 +164,9 @@
 <p><span style="color:orange">The average duration of intense rain is computed by transposing the intense PPT TRUE/FALSE matrix and computing a cumulative sum for each catchment resetting the count with each <code>FALSE</code>. Only the max value in each intense period is kept and the rest set to NA. The mean for each catchment is computed. </span>.</p>
 <p><img src="../workspace/img/high_dur_ppt.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="50%"></p>
 </div>
-<div id="low-duration" class="section level4">
-<h4 class="hasAnchor">
-<a href="#low-duration" class="anchor"></a><strong>Low duration</strong>
+<div class="section level4">
+<h4 id="low-duration">
+<strong>Low duration</strong><a class="anchor" aria-label="anchor" href="#low-duration"></a>
 </h4>
 <blockquote>
 <p>average duration of dry periods (number of consecutive days &lt;1 mm/day) (days)</p>
@@ -179,12 +175,12 @@
 <p><img src="../workspace/img/low_dur_ppt.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="50%"></p>
 </div>
 </div>
-<div id="energy" class="section level3 tabset tabset-fade">
-<h3 class="hasAnchor">
-<a href="#energy" class="anchor"></a>Energy</h3>
-<div id="mean-pet" class="section level4">
-<h4 class="hasAnchor">
-<a href="#mean-pet" class="anchor"></a><strong>Mean PET</strong>
+<div class="section level3 tabset tabset-fade">
+<h3 id="energy">Energy<a class="anchor" aria-label="anchor" href="#energy"></a>
+</h3>
+<div class="section level4">
+<h4 id="mean-pet">
+<strong>Mean PET</strong><a class="anchor" aria-label="anchor" href="#mean-pet"></a>
 </h4>
 <blockquote>
 <p>Mean daily PET (estimated by N15 using Priestley-Taylor formulation calibrated for each catchment)</p>
@@ -192,9 +188,9 @@
 <p><span style="color:orange">Mean daily PET is computed from the PET Gridment files. </span>.</p>
 <p><img src="../workspace/img/pet.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="50%"></p>
 </div>
-<div id="aridity" class="section level4">
-<h4 class="hasAnchor">
-<a href="#aridity" class="anchor"></a><strong>Aridity</strong>
+<div class="section level4">
+<h4 id="aridity">
+<strong>Aridity</strong><a class="anchor" aria-label="anchor" href="#aridity"></a>
 </h4>
 <blockquote>
 <p>Aridity (PET/P), ratio of mean PET to mean precipitation. Daily GridMet files for pet_* and pr_* from 2018-2020 are used to compute to annual mean PET and PPT.</p>
@@ -203,12 +199,12 @@
 <p><img src="../workspace/img/ai.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="50%"></p>
 </div>
 </div>
-<div id="terrain" class="section level3 tabset tabset-fade">
-<h3 class="hasAnchor">
-<a href="#terrain" class="anchor"></a>Terrain</h3>
-<div id="mean-elevation-meters" class="section level4">
-<h4 class="hasAnchor">
-<a href="#mean-elevation-meters" class="anchor"></a><strong>Mean elevation (meters)</strong>
+<div class="section level3 tabset tabset-fade">
+<h3 id="terrain">Terrain<a class="anchor" aria-label="anchor" href="#terrain"></a>
+</h3>
+<div class="section level4">
+<h4 id="mean-elevation-meters">
+<strong>Mean elevation (meters)</strong><a class="anchor" aria-label="anchor" href="#mean-elevation-meters"></a>
 </h4>
 <blockquote>
 <p>Catchment mean elevation (meters)</p>
@@ -216,9 +212,9 @@
 <p><span style="color:orange">The 30m National Elevation Dataset is used to compute mean elevation (meters) </span>.</p>
 <p><img src="../workspace/img/mean_elevation.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="50%"></p>
 </div>
-<div id="mean-slope" class="section level4">
-<h4 class="hasAnchor">
-<a href="#mean-slope" class="anchor"></a><strong>Mean slope</strong>
+<div class="section level4">
+<h4 id="mean-slope">
+<strong>Mean slope</strong><a class="anchor" aria-label="anchor" href="#mean-slope"></a>
 </h4>
 <blockquote>
 <p>Catchment mean slope (m/km)</p>
@@ -227,12 +223,12 @@
 <p><img src="../workspace/img/mean_slope.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="50%"></p>
 </div>
 </div>
-<div id="soils" class="section level3 tabset tabset-fade">
-<h3 class="hasAnchor">
-<a href="#soils" class="anchor"></a>Soils</h3>
-<div id="geological-permeability" class="section level4">
-<h4 class="hasAnchor">
-<a href="#geological-permeability" class="anchor"></a><strong>Geological permeability</strong>
+<div class="section level3 tabset tabset-fade">
+<h3 id="soils">Soils<a class="anchor" aria-label="anchor" href="#soils"></a>
+</h3>
+<div class="section level4">
+<h4 id="geological-permeability">
+<strong>Geological permeability</strong><a class="anchor" aria-label="anchor" href="#geological-permeability"></a>
 </h4>
 <blockquote>
 <p>Subsurface permeability (log10) m2 from GLHYMPS</p>
@@ -241,9 +237,9 @@
 <p>Using field: <code>logK_Ice_x100_INT</code> from the supplied shapefile the data is rasterized to the CONUS-Soil 1KM2 grid. </p>
 <p><img src="../workspace/img/permeability.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="50%"></p>
 </div>
-<div id="frac--carbonate-sedimentary-rock" class="section level4">
-<h4 class="hasAnchor">
-<a href="#frac--carbonate-sedimentary-rock" class="anchor"></a><strong>Frac. carbonate sedimentary rock</strong>
+<div class="section level4">
+<h4 id="frac--carbonate-sedimentary-rock">
+<strong>Frac. carbonate sedimentary rock</strong><a class="anchor" aria-label="anchor" href="#frac--carbonate-sedimentary-rock"></a>
 </h4>
 <blockquote>
 <p>Fraction of the catchment area characterized as “Carbonate sedimentary rocks” from GLiM</p>
@@ -252,9 +248,9 @@
 <p>Using field: <code>xx</code> from the supplied shapefile where polygons == ‘sc’. The data is rasterized to the CONUS-Soil 1KM2 grid. </p>
 <p><img src="../workspace/img/carbonates.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="50%"></p>
 </div>
-<div id="clay-fraction" class="section level4">
-<h4 class="hasAnchor">
-<a href="#clay-fraction" class="anchor"></a><strong>Clay fraction</strong>
+<div class="section level4">
+<h4 id="clay-fraction">
+<strong>Clay fraction</strong><a class="anchor" aria-label="anchor" href="#clay-fraction"></a>
 </h4>
 <blockquote>
 <p>clay fraction (of the soil material smaller than 2 mm, layers marked as oragnic material, water, bedrock and “other” were excluded) % (STATSGO)</p>
@@ -262,9 +258,9 @@
 <p><span style="color:orange"> Data from the CONUS Soil <code>clay.bsq</code> is built into a raster field and the percentage of clay is computed for the top 1m of the soil column. </span>.</p>
 <p><img src="../workspace/img/clay.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="50%"></p>
 </div>
-<div id="silt-fraction" class="section level4">
-<h4 class="hasAnchor">
-<a href="#silt-fraction" class="anchor"></a><strong>Silt Fraction</strong>
+<div class="section level4">
+<h4 id="silt-fraction">
+<strong>Silt Fraction</strong><a class="anchor" aria-label="anchor" href="#silt-fraction"></a>
 </h4>
 <blockquote>
 <p>silt fraction (of the soil material smaller than 2 mm, layers marked as oragnic material, water, bedrock and “other” were excluded) % (STATSGO)</p>
@@ -272,9 +268,9 @@
 <p><span style="color:orange"> Data from the CONUS Soil <code>silt.bsq</code> is built into a raster field and the percentage of silt is computed for the top 1m of the soil column. </span>.</p>
 <p><img src="../workspace/img/silt.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="50%"></p>
 </div>
-<div id="sand-fraction" class="section level4">
-<h4 class="hasAnchor">
-<a href="#sand-fraction" class="anchor"></a><strong>Sand fraction</strong>
+<div class="section level4">
+<h4 id="sand-fraction">
+<strong>Sand fraction</strong><a class="anchor" aria-label="anchor" href="#sand-fraction"></a>
 </h4>
 <blockquote>
 <p>sand fraction (of the soil material smaller than 2 mm, layers marked as organic material, water, bedrock and “other” were excluded) % (STATSGO)</p>
@@ -282,20 +278,20 @@
 <p><span style="color:orange"> Data from the CONUS Soil <code>sand.bsq</code> is built into a raster field and the percentage of sand is computed for the top 1m of the soil column. </span>.</p>
 <p><img src="../workspace/img/sand.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="50%"></p>
 </div>
-<div id="saturated-hydraulic-conductivity" class="section level4">
-<h4 class="hasAnchor">
-<a href="#saturated-hydraulic-conductivity" class="anchor"></a><strong>Saturated hydraulic conductivity</strong>
+<div class="section level4">
+<h4 id="saturated-hydraulic-conductivity">
+<strong>Saturated hydraulic conductivity</strong><a class="anchor" aria-label="anchor" href="#saturated-hydraulic-conductivity"></a>
 </h4>
 <blockquote>
-<p>saturated hydraulic conductivity (estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value [36 cm/hr] for layers marked as organic material, layers marked as water, bedrock and “other” were excluded) cm/hr <a href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/WR020i006p00682">Table 4</a></p>
+<p>saturated hydraulic conductivity (estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value [36 cm/hr] for layers marked as organic material, layers marked as water, bedrock and “other” were excluded) cm/hr <a href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/WR020i006p00682" class="external-link">Table 4</a></p>
 </blockquote>
 <p><span class="math inline">\(-0.60 + (0.0126 x %sand) - (0.0064 x %clay)\)</span></p>
 <p><span style="color:orange">Using the mean sand and clay percentages in the top 1m of soil, the above formula can be applied</span>.</p>
 <p><img src="../workspace/img/k.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="50%"></p>
 </div>
-<div id="volumetric-porosity" class="section level4">
-<h4 class="hasAnchor">
-<a href="#volumetric-porosity" class="anchor"></a><strong>Volumetric porosity</strong>
+<div class="section level4">
+<h4 id="volumetric-porosity">
+<strong>Volumetric porosity</strong><a class="anchor" aria-label="anchor" href="#volumetric-porosity"></a>
 </h4>
 <blockquote>
 <p>volumetric porosity (saturated volumetric water content estimated using a multiple linear regression based on sand and clay fraction for the layers marked as USDA soil texture class and a default value [0.9] for layers marked as organic material, layers marked as water, bedrock and “other” were excluded)</p>
@@ -304,9 +300,9 @@
 <p><span style="color:orange">Using the mean sand and clay percentages in the top 1m of soil, the above formula can be applied</span>.</p>
 <p><img src="../workspace/img/vp.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="50%"></p>
 </div>
-<div id="soil-depth-to-bedrock" class="section level4">
-<h4 class="hasAnchor">
-<a href="#soil-depth-to-bedrock" class="anchor"></a><strong>Soil depth to bedrock</strong>
+<div class="section level4">
+<h4 id="soil-depth-to-bedrock">
+<strong>Soil depth to bedrock</strong><a class="anchor" aria-label="anchor" href="#soil-depth-to-bedrock"></a>
 </h4>
 <blockquote>
 <p>soil depth (maximum 1.5 m, layers marked as water and bedrock were excluded) (m)</p>
@@ -314,9 +310,9 @@
 <p><span style="color:orange">Data from the CONUS Soil <code>depth.bsq</code> is built into a raster field to compute catchment mean </span>.</p>
 <p><img src="../workspace/img/rockdepth.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="50%"></p>
 </div>
-<div id="max--water-content" class="section level4">
-<h4 class="hasAnchor">
-<a href="#max--water-content" class="anchor"></a><strong>Max. water content</strong>
+<div class="section level4">
+<h4 id="max--water-content">
+<strong>Max. water content</strong><a class="anchor" aria-label="anchor" href="#max--water-content"></a>
 </h4>
 <blockquote>
 <p>maximum water content (combination of porosity and soil_depth_statsgo, layers marked as water, bedrock and “other” were excluded)</p>
@@ -325,12 +321,12 @@
 <p><img src="../workspace/img/mwc.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="50%"></p>
 </div>
 </div>
-<div id="land-cover-veg" class="section level3 tabset tabset-fade">
-<h3 class="hasAnchor">
-<a href="#land-cover-veg" class="anchor"></a>Land Cover / Veg</h3>
-<div id="fraction-of-forest" class="section level4">
-<h4 class="hasAnchor">
-<a href="#fraction-of-forest" class="anchor"></a><strong>Fraction of Forest</strong>
+<div class="section level3 tabset tabset-fade">
+<h3 id="land-cover-veg">Land Cover / Veg<a class="anchor" aria-label="anchor" href="#land-cover-veg"></a>
+</h3>
+<div class="section level4">
+<h4 id="fraction-of-forest">
+<strong>Fraction of Forest</strong><a class="anchor" aria-label="anchor" href="#fraction-of-forest"></a>
 </h4>
 <blockquote>
 <p>forest fraction</p>
@@ -338,9 +334,9 @@
 <p><span style="color:blue">The percent forest from the MODIS land cover is computed. MODIS land cover is represented on the the 1km Soil Grid and forest is computed as the aggregate of Evergreen broadleaf forests (2); Deciduous needleleaf forests (3); Deciduous broadleaf forests (4) and (5) Mixed forests </span>.</p>
 <p><img src="../workspace/img/forest.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="50%"></p>
 </div>
-<div id="green-vegitative-fraction-gvf" class="section level4">
-<h4 class="hasAnchor">
-<a href="#green-vegitative-fraction-gvf" class="anchor"></a><strong>Green Vegitative Fraction (GVF)</strong>
+<div class="section level4">
+<h4 id="green-vegitative-fraction-gvf">
+<strong>Green Vegitative Fraction (GVF)</strong><a class="anchor" aria-label="anchor" href="#green-vegitative-fraction-gvf"></a>
 </h4>
 <p>The Green Vegetative Fraction (GVF) is computed from NDVI. NDVI is taken from the MODIS Terra mission.</p>
 <p><span class="math inline">\(GVF = \frac{NDVI_{i} - NDVI_{barren}}{ NDVI_{lc} - NDVI_{barren}}\)</span></p>
@@ -355,9 +351,9 @@
 </blockquote>
 <p><img src="../workspace/img/dif_gvf.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="50%"></p>
 </div>
-<div id="leaf-area-index-lai-diff-" class="section level4">
-<h4 class="hasAnchor">
-<a href="#leaf-area-index-lai-diff-" class="anchor"></a><strong>Leaf Area Index (LAI) diff.</strong>
+<div class="section level4">
+<h4 id="leaf-area-index-lai-diff-">
+<strong>Leaf Area Index (LAI) diff.</strong><a class="anchor" aria-label="anchor" href="#leaf-area-index-lai-diff-"></a>
 </h4>
 <p><span style="color:blue">8-day MODIS LAI measurement were used to generate monthly rasters between 2000 and 2020. These were then used to compute a month based, pixel-wise averages from which, the maximum and maximum-minimum were computed pixel-wise. From these, a catchment mean-maximum and mean-difference were computed</span>.</p>
 <blockquote>
@@ -385,11 +381,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Mike Johnson.</p>
+  <p></p>
+<p>Developed by Mike Johnson.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -397,6 +395,8 @@
 
   
 
+
+  
 
   </body>
 </html>

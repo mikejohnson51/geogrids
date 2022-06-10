@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,16 +41,10 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mikejohnson51/geogrids/">
+  <a href="https://github.com/mikejohnson51/geogrids/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -89,108 +85,108 @@
       <h1 data-toc-skip>Basic Example</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mikejohnson51/geogrids/blob/master/vignettes/01-basics.Rmd"><code>vignettes/01-basics.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mikejohnson51/geogrids/blob/HEAD/vignettes/01-basics.Rmd" class="external-link"><code>vignettes/01-basics.Rmd</code></a></small>
       <div class="hidden name"><code>01-basics.Rmd</code></div>
 
     </div>
 
     
     
-<div id="define-area-of-interest-and-aggregation-units" class="section level1">
-<h1 class="hasAnchor">
-<a href="#define-area-of-interest-and-aggregation-units" class="anchor"></a>Define Area of Interest and Aggregation Units</h1>
+<div class="section level2">
+<h2 id="define-area-of-interest-and-aggregation-units">Define Area of Interest and Aggregation Units<a class="anchor" aria-label="anchor" href="#define-area-of-interest-and-aggregation-units"></a>
+</h2>
 <p><img src="baseaoi-1.png" title="plot of chunk aoi" alt="plot of chunk aoi" width="100%"></p>
 </div>
-<div id="find-cached-geogrids" class="section level1">
-<h1 class="hasAnchor">
-<a href="#find-cached-geogrids" class="anchor"></a>Find cached geogrids</h1>
+<div class="section level2">
+<h2 id="find-cached-geogrids">Find cached geogrids<a class="anchor" aria-label="anchor" href="#find-cached-geogrids"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cache</span> <span class="op">=</span> <span class="fu"><a href="../reference/geo_cache_list.html">geo_cache_list</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">ai_norm</span> <span class="op">=</span> <span class="va">cache</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'ai_normal'</span>, <span class="va">fullname</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">'ai_normal'</span>, <span class="va">fullname</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">pull</span><span class="op">(</span><span class="va">fullname</span><span class="op">)</span>
 
 <span class="va">soil_files</span> <span class="op">=</span> <span class="va">cache</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'silt-1m-percent.tif'</span>, <span class="va">fullname</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">'silt-1m-percent.tif'</span>, <span class="va">fullname</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">pull</span><span class="op">(</span><span class="va">fullname</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="disparate-grids" class="section level1">
-<h1 class="hasAnchor">
-<a href="#disparate-grids" class="anchor"></a>Disparate Grids 😢</h1>
+<div class="section level2">
+<h2 id="disparate-grids">Disparate Grids 😢<a class="anchor" aria-label="anchor" href="#disparate-grids"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/make_grid.html">make_grid</a></span><span class="op">(</span><span class="va">ai_norm</span><span class="op">)</span></code></pre></div>
-<pre><code>## $ext
-## [1] -124.79   25.05  -67.04   49.42
-## 
-## $dimXY
-## [1] 1386  585
-## 
-## $resXY
-## [1] 0.04167 0.04167
-## 
-## $prj
-## [1] "+proj=longlat +datum=WGS84 +no_defs"</code></pre>
+<pre><code><span class="co">## $ext</span>
+<span class="co">## [1] -124.79   25.05  -67.04   49.42</span>
+<span class="co">## </span>
+<span class="co">## $dimXY</span>
+<span class="co">## [1] 1386  585</span>
+<span class="co">## </span>
+<span class="co">## $resXY</span>
+<span class="co">## [1] 0.04167 0.04167</span>
+<span class="co">## </span>
+<span class="co">## $prj</span>
+<span class="co">## [1] "+proj=longlat +datum=WGS84 +no_defs"</span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/make_grid.html">make_grid</a></span><span class="op">(</span><span class="va">soil_files</span><span class="op">)</span></code></pre></div>
-<pre><code>## $ext
-## [1] -2357000   277000  2259000  3173000
-## 
-## $dimXY
-## [1] 4616 2896
-## 
-## $resXY
-## [1] 1000 1000
-## 
-## $prj
-## [1] "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD27 +units=m +no_defs"</code></pre>
+<pre><code><span class="co">## $ext</span>
+<span class="co">## [1] -2357000   277000  2259000  3173000</span>
+<span class="co">## </span>
+<span class="co">## $dimXY</span>
+<span class="co">## [1] 4616 2896</span>
+<span class="co">## </span>
+<span class="co">## $resXY</span>
+<span class="co">## [1] 1000 1000</span>
+<span class="co">## </span>
+<span class="co">## $prj</span>
+<span class="co">## [1] "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD27 +units=m +no_defs"</span></code></pre>
 </div>
-<div id="warp-ai-to-soils-and-execute-zonal" class="section level1">
-<h1 class="hasAnchor">
-<a href="#warp-ai-to-soils-and-execute-zonal" class="anchor"></a>Warp AI to soils and execute Zonal</h1>
+<div class="section level2">
+<h2 id="warp-ai-to-soils-and-execute-zonal">Warp AI to soils and execute Zonal<a class="anchor" aria-label="anchor" href="#warp-ai-to-soils-and-execute-zonal"></a>
+</h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span>
   <span class="va">out</span>   <span class="op">=</span> <span class="fu"><a href="../reference/geogrid_warp.html">geogrid_warp</a></span><span class="op">(</span><span class="va">ai_norm</span>, <span class="fu"><a href="../reference/make_grid.html">make_grid</a></span><span class="op">(</span><span class="va">soil_files</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, disk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="va">sta</span>   <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">soil_files</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">sta</span>   <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">out</span>, <span class="va">soil_files</span><span class="op">)</span><span class="op">)</span>
   <span class="va">oo</span>    <span class="op">=</span> <span class="fu">execute_zonal</span><span class="op">(</span><span class="va">sta</span>, <span class="va">AOI</span>, <span class="st">"geoid"</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
-<pre><code>##    user  system elapsed 
-##   8.439   1.916  10.894</code></pre>
+<pre><code><span class="co">##    user  system elapsed </span>
+<span class="co">##   8.439   1.916  10.894</span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></code></pre></div>
-<pre><code>##    geoid     V1     V2
-## 1: 01001 0.9602 0.2573
-## 2: 01003 0.8641 0.2383
-## 3: 01005 1.0199 0.2043
-## 4: 01007 0.9078 0.3181
-## 5: 01009 0.8451 0.3371
-## 6: 01011 0.9868 0.2654</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##    geoid     V1     V2</span>
+<span class="co">## 1: 01001 0.9602 0.2573</span>
+<span class="co">## 2: 01003 0.8641 0.2383</span>
+<span class="co">## 3: 01005 1.0199 0.2043</span>
+<span class="co">## 4: 01007 0.9078 0.3181</span>
+<span class="co">## 5: 01009 0.8451 0.3371</span>
+<span class="co">## 6: 01011 0.9868 0.2654</span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">w</span> <span class="op">=</span> <span class="fu">weighting_grid</span><span class="op">(</span><span class="va">sta</span>, <span class="va">AOI</span>, <span class="st">"geoid"</span><span class="op">)</span>
 
 <span class="va">new</span> <span class="op">=</span> <span class="va">cache</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'silt-1m-percent.tif|sand-1m-percent.tif|clay-1m-percent.tif'</span>, <span class="va">fullname</span><span class="op">)</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">'silt-1m-percent.tif|sand-1m-percent.tif|clay-1m-percent.tif'</span>, <span class="va">fullname</span><span class="op">)</span><span class="op">)</span> 
 
 <span class="va">sta</span> <span class="op">=</span> 
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span>
-  <span class="va">oo</span>    <span class="op">=</span> <span class="fu">execute_zonal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">fullname</span>, <span class="va">out</span><span class="op">)</span>, w <span class="op">=</span> <span class="va">w</span>,<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">oo</span>    <span class="op">=</span> <span class="fu">execute_zonal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">fullname</span>, <span class="va">out</span><span class="op">)</span>, w <span class="op">=</span> <span class="va">w</span>,<span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 
 
-<span class="va">oo</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">oo</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geoid"</span>, <span class="st">"clay"</span>, <span class="st">"sand"</span>, <span class="st">"silt"</span>, <span class="st">"AI"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">oo</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">oo</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"geoid"</span>, <span class="st">"clay"</span>, <span class="st">"sand"</span>, <span class="st">"silt"</span>, <span class="st">"AI"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></code></pre></div>
-<pre><code>##    geoid   clay   sand   silt     AI
-## 1: 01001 0.2060 0.5359 0.2573 0.9602
-## 2: 01003 0.1714 0.5416 0.2383 0.8641
-## 3: 01005 0.1687 0.6074 0.2043 1.0199
-## 4: 01007 0.2245 0.3724 0.3181 0.9078
-## 5: 01009 0.1670 0.2545 0.3371 0.8451
-## 6: 01011 0.2658 0.4679 0.2654 0.9868</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##    geoid   clay   sand   silt     AI</span>
+<span class="co">## 1: 01001 0.2060 0.5359 0.2573 0.9602</span>
+<span class="co">## 2: 01003 0.1714 0.5416 0.2383 0.8641</span>
+<span class="co">## 3: 01005 0.1687 0.6074 0.2043 1.0199</span>
+<span class="co">## 4: 01007 0.2245 0.3724 0.3181 0.9078</span>
+<span class="co">## 5: 01009 0.1670 0.2545 0.3371 0.8451</span>
+<span class="co">## 6: 01011 0.2658 0.4679 0.2654 0.9868</span></code></pre>
 </div>
-<div id="results" class="section level1">
-<h1 class="hasAnchor">
-<a href="#results" class="anchor"></a>Results</h1>
+<div class="section level2">
+<h2 id="results">Results<a class="anchor" aria-label="anchor" href="#results"></a>
+</h2>
 <p><img src="basemap-1.png" title="plot of chunk map" alt="plot of chunk map" width="100%"></p>
 </div>
   </div>
@@ -206,11 +202,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Mike Johnson.</p>
+  <p></p>
+<p>Developed by Mike Johnson.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -218,6 +216,8 @@
 
   
 
+
+  
 
   </body>
 </html>
